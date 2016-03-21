@@ -1,0 +1,115 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+body {
+	background: url(../img/bg.png) no-repeat top center scroll;
+	font-size: 22px;
+	padding-top: 50px;
+	text-transform: uppercase;
+	height: 100vh;
+}
+
+.divider {
+	border-top: 1px solid #232323;
+}
+
+.navmenu,
+.navmenu-default,
+.navbar-offcanvas {
+	background-color: #363636;
+	border: 0;
+	width: 65%;
+}
+
+.navbar,
+.navbar-default,
+.navbar-fixed-top {
+	background: none;
+	border: 0;
+}
+
+.navbar-toggle {
+	border: 0;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #424242;
+	border: 2px solid #424242;
+	margin-bottom: 5px;
+	width: 30px;
+}
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+	background: none;
+}
+
+.sign-up {
+	background: none;
+	border: 0;
+	color: white;
+	margin-right: 10px;
+	margin-top: 10px;
+	text-decoration: none;
+}
+.sign-up:hover{
+	color: white;
+	text-decoration: none;
+}
+
+.navmenu-brand {
+	background-color: #474747;
+	height: auto;
+	margin-top: 0;
+}
+.nav>li>a {
+		font-size: 16px;
+	}
+
+.avatar-ph {
+	background: url(../img/avr.jpg) center no-repeat;
+	background-size: cover;
+	border-radius: 50%;
+	display: table-cell;
+	height: 75px;
+	width: 75px;
+	vertical-align: middle;
+}
+
+.avatar-name {
+	display: table-cell;
+	padding-left: 20px;
+}
+.logo {
+	display: block;
+	margin: 0 auto;
+}
+.btn-ghost {
+	background-color: #fc1c1c;
+	border: 0;
+	border-radius: 50px;
+	color: white;
+	font-size: 20px;
+	display: block;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 25%;
+	text-transform: uppercase;
+	width: 300px;
+}
+
+.window-title {
+	color: #283437;
+	font-size: 36px;
+	font-style: italic;
+}
+
+@media only screen and (max-width: 480px) {
+	/* MENU */
+	
+	.nav>li>a {
+		font-size: 14px;
+	}
+}

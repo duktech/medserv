@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Medserv</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="css/font-awesome/font-awesome.css" rel="stylesheet">
+	<link href="css/base.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="css/page.css" rel="stylesheet">
+	<link href="css/responsive-calendar.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<div class="navbar navbar-default navbar-fixed-top">
+					<div class="pull-left icon-cont"><img src="img/logo.png" alt="Logo icon" class="logo-icon" /> </div>
+					<h1 class="window-title">CALENDAR</h1>
+					<button class="home-btn pull-right" onclick="window.open('ntermin.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="container-fluid">
+					<div class="row bs-wizard" style="border-bottom:0;">
+						<div class="col-xs-3 bs-wizard-step complete">
+							<div class="text-center bs-wizard-stepnum">Step 1</div>
+							<div class="progress">
+								<div class="progress-bar"></div>
+							</div>
+							<a href="#" class="bs-wizard-dot"></a>
+							<div class="bs-wizard-info text-center">HAUSARZT</div>
+						</div>
+
+						<div class="col-xs-3 bs-wizard-step complete">
+							<!-- complete -->
+							<div class="text-center bs-wizard-stepnum">BEHANDLUNG</div>
+							<div class="progress">
+								<div class="progress-bar"></div>
+							</div>
+							<a href="#" class="bs-wizard-dot"></a>
+							<div class="bs-wizard-info text-center">
+								<div class="behandlung"></div>
+							</div>
+						</div>
+
+						<div class="col-xs-3 bs-wizard-step active">
+							<!-- complete -->
+							<div class="text-center bs-wizard-stepnum">DATE</div>
+							<div class="progress">
+								<div class="progress-bar"></div>
+							</div>
+							<a href="#" class="bs-wizard-dot"></a>
+							<div class="bs-wizard-info text-center">
+								<div class="date-post"></div>
+							</div>
+						</div>
+
+						<div class="col-xs-3 bs-wizard-step disabled">
+							<!-- active -->
+							<div class="text-center bs-wizard-stepnum">-</div>
+							<div class="progress">
+								<div class="progress-bar"></div>
+							</div>
+							<a href="#" class="bs-wizard-dot"></a>
+							<div class="bs-wizard-info text-center">-</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 text-center">
+
+			</div>
+		</div>
+		<div class="container">
+			<!-- Responsive calendar - START -->
+			<div class="responsive-calendar">
+				<div class="controls">
+					<a class="pull-left" data-go="prev">
+						<div class="btn btn-primary">Prev</div>
+					</a>
+					<h4><span data-head-year></span> <span data-head-month></span></h4>
+					<a class="pull-right" data-go="next">
+						<div class="btn btn-primary">Next</div>
+					</a>
+				</div>
+				<hr/>
+				<div class="day-headers">
+					<div class="day header">Mon</div>
+					<div class="day header">Tue</div>
+					<div class="day header">Wed</div>
+					<div class="day header">Thu</div>
+					<div class="day header">Fri</div>
+					<div class="day header">Sat</div>
+					<div class="day header">Sun</div>
+				</div>
+				<div class="days" data-group="days">
+
+				</div>
+			</div>
+			<!-- Responsive calendar - END -->
+		</div>
+		<div class="row">
+			<div class="col-xs-12 nav-btn">
+				<button class="round-btn pull-left" onclick="window.open('ntermin3.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+				<button class="round-btn pull-right" onclick="window.open('schedule.html?namepost=' + $('.behandlung').text() + '&postdate=' + postdate, '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+			</div>
+
+		</div>
+	</div>
+	<!-- /.container -->
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/jquery.js"></script>
+	<script>
+		window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+	</script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jasny-bootstrap.min.js"></script>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/responsive-calendar.js"></script>
+	<script src="js/vlad.js"></script>
+	<script type="text/javascript">
+		var postdate;
+		$(document).ready(function () {
+
+			$(".responsive-calendar").responsiveCalendar({
+				time: '2016-03',
+				events: {
+					"2013-04-30": {
+						"number": 5,
+						"url": "http://w3widgets.com/responsive-slider"
+					},
+					"2013-04-26": {
+						"number": 1,
+						"url": "http://w3widgets.com"
+					},
+					"2013-05-03": {
+						"number": 1
+					},
+					"2013-06-12": {}
+				},
+				onDayClick: function (events) {
+					postdate = $(this).attr("data-day") + "/" + $(this).attr("data-month");
+				}
+
+			});
+			var namepost = getParameterByName('namepost');
+			if (namepost != null) {
+				$(".behandlung").text(namepost);
+			}
+			var hrpost = getParameterByName('hrpost');
+			if (hrpost != null) {
+				$(".time-hr").text(hrpost);
+			}
+
+		});
+
+		function getParameterByName(name, url) {
+			if (!url) url = window.location.href;
+			url = url.toLowerCase(); // This is just to avoid case sensitiveness  
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(url);
+			if (!results) return null;
+			if (!results[2]) return '';
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+	</script>
+
+</body>
+
+</html>
