@@ -47,7 +47,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn-ghost pagination-centered" onclick="service_login();">LOGIN</button>
+				<button class="btn-ghost pagination-centered" onclick="service.user_login($('#userEmail').val(), $('#userPswd').val());">LOGIN</button>
 			</div>
 		</div>
 	</div>
@@ -65,46 +65,12 @@
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
 	
+	<script src="js/main.js"></script>
 	<script type="text/javascript">
-		function get_current_user(){
-			if(localStorage.userToken){
-				return localStorage.userToken;
-			}
-			return false;
-		}
-		var current_user = get_current_user();
+		var current_user = helper.get_current_user();
 		if(current_user){//logged in
-			alert('Already logged in');
-		}else{//not logged in
-			
+			window.open('ntermin.html', '_self', 'location=yes');
 		}
-		
-		function service_login(){
-			var email = $('#userEmail').val();
-			var pswd = $('#userPswd').val();
-			$.ajax({
-				url: 'http://boookme.duk-tech.com/WS/Service.svc/Login',
-				type: 'POST',
-				data: JSON.stringify({
-					username: email,
-					password: pswd
-				}),
-				contentType: 'application/json',
-				success: function(data){
-					alert(data.AuthenticationResult.Message);
-					if(data.AuthenticationResult.AuthStatus == "1"){ //if success
-						localStorage.userToken = data.AuthenticationResult.Token;
-						window.open('ntermin.html', '_self', 'location=yes');
-					}
-				},
-				error: function(err) {
-					alert('Error');
-				}
-			});
-		}
-		$(document).ready(function(){
-
-		});
 	</script>
 </body>
 
