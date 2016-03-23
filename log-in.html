@@ -66,6 +66,19 @@
 	<script src="js/html5shiv.min.js"></script>
 	
 	<script type="text/javascript">
+		function get_current_user(){
+			if(localStorage.userToken){
+				return localStorage.userToken;
+			}
+			return false;
+		}
+		var current_user = get_current_user();
+		if(current_user){//logged in
+			alert('Already logged in');
+		}else{//not logged in
+			
+		}
+		
 		function service_login(){
 			var email = $('#userEmail').val();
 			var pswd = $('#userPswd').val();
@@ -80,8 +93,8 @@
 				success: function(data){
 					alert(data.AuthenticationResult.Message);
 					if(data.AuthenticationResult.AuthStatus == "1"){ //if success
-						alert('Token: ' + data.AuthenticationResult.Token);
-						//window.open('ntermin.html', '_self', 'location=yes');
+						localStorage.userToken = data.AuthenticationResult.Token;
+						window.open('ntermin.html', '_self', 'location=yes');
 					}
 				},
 				error: function(err) {
