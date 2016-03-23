@@ -78,12 +78,16 @@
 				}),
 				headers: {'Content-Type': 'application/json'},
 				success: function(data){
-					alert('success')
-					alert(data);
+					if(data.AuthenticationResult.AuthStatus == 1){
+						alert('auth success');
+						alert(data.AuthenticationResult.Token);
+					}else{
+						alert('auth failed');
+					}
 					//window.open('ntermin.html', '_self', 'location=yes');
 				},
 				error: function(err) {
-					alert(err);
+					alert('Eroare');
 				}
 			});
 		}
