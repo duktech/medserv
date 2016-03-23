@@ -47,7 +47,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn-ghost pagination-centered" onclick="window.open('ntermin.html', '_self', 'location=yes');">LOGIN</button>
+				<button class="btn-ghost pagination-centered" onclick="service_login();">LOGIN</button>
 			</div>
 		</div>
 	</div>
@@ -64,6 +64,32 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
+	
+	<script type="text/javascript">
+		function service_login(){
+			var email = $('#userEmail').val();
+			var pswd = $('#userPswd').val();
+			$.ajax({
+				url: 'http://boookme.duk-tech.com/WS/Service.svc/Login',
+				type: 'POST',
+				data: JSON.stringify({
+					username: email,
+					password: pswd
+				}),
+				headers: {'Content-Type': 'application/json'},
+				success: function(data){
+					alert(data);
+					//window.open('ntermin.html', '_self', 'location=yes');
+				},
+				error: function(err) {
+					alert(err);
+				}
+			});
+		}
+		$(document).ready(function(){
+
+		});
+	</script>
 </body>
 
 </html>
