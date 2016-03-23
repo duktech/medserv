@@ -40,8 +40,8 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="E-MAIL">
-					<input type="password" class="form-control" placeholder="PASSWORD">
+					<input type="text" class="form-control" id="userEmail" placeholder="E-MAIL">
+					<input type="password" class="form-control" id="userPswd" placeholder="PASSWORD">
 				</div>
 			</div>
 		</div>
@@ -76,19 +76,16 @@
 					username: email,
 					password: pswd
 				}),
-				headers: {'Content-Type': 'application/json'},
+				contentType: 'application/json',
 				success: function(data){
-				alert(data.AuthenticationResult.AuthStatus);
-					if(data.AuthenticationResult.AuthStatus == "1"){
-						alert('auth success');
-						alert(data.AuthenticationResult.Token);
-					}else{
-						alert('auth failed');
+					alert(data.AuthenticationResult.Message);
+					if(data.AuthenticationResult.AuthStatus == "1"){ //if success
+						alert('Token: ' + data.AuthenticationResult.Token);
+						//window.open('ntermin.html', '_self', 'location=yes');
 					}
-					//window.open('ntermin.html', '_self', 'location=yes');
 				},
 				error: function(err) {
-					alert('Eroare');
+					alert('Error');
 				}
 			});
 		}
