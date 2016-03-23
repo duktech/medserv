@@ -78,7 +78,8 @@
 				}),
 				headers: {'Content-Type': 'application/json'},
 				success: function(data){
-					if(data.AuthenticationResult.AuthStatus == 1){
+				alert(data.AuthenticationResult.AuthStatus);
+					if(data.AuthenticationResult.AuthStatus == "1"){
 						alert('auth success');
 						alert(data.AuthenticationResult.Token);
 					}else{
