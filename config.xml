@@ -12,7 +12,8 @@
 		<author href="https://build.phonegap.com" email="support@phonegap.com">
 			DUK TECH
 		</author>
-
+		
+		<gap:plugin name="org.apache.cordova.dialogs" />
 		
 		<preference name="phonegap-version" value="cli-5.2.0" />
 		<preference name="orientation" value="default" />
