@@ -13,7 +13,13 @@ var helper = {
 var service = {
   user_register: function (firstname, lastname, email, pswd, cpswd) {
     if(firstname == '' || lastname == '' || email == '' || pswd == '' || cpswd == ''){
-      alert('All fields are mandatory!');
+      //alert('All fields are mandatory!');
+      navigator.notification.alert(
+        'You are the winner!',  // message
+        null,         // callback
+        'Game Over',            // title
+        'Done'                  // buttonName
+      );
       return 0;
     }
     if($('#terms-checkbox').prop('checked') == false){
