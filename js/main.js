@@ -14,27 +14,27 @@ var service = {
   user_register: function (firstname, lastname, email, pswd, cpswd) {
     if(firstname == '' || lastname == '' || email == '' || pswd == '' || cpswd == ''){
       navigator.notification.alert(
-        'Warning',  // message
+        'All fields are mandatory!',  // message
         function(){},         // callback
-        'All fields are mandatory!',            // title
+        'Warning',            // title
         'Ok'                  // buttonName
       );
       return 0;
     }
     if($('#terms-checkbox').prop('checked') == false){
       navigator.notification.alert(
-        'Warning',  // message
+        'You must agree to terms!',  // message
         function(){},         // callback
-        'You must agree to terms!',            // title
+        'Warning',            // title
         'Ok'                  // buttonName
       );
       return 0;
     }
     if(pswd != cpswd){
       navigator.notification.alert(
-        'Warning',  // message
+        'Passwords does not match!',  // message
         function(){},         // callback
-        'Passwords does not match!',            // title
+        'Warning',            // title
         'Ok'                  // buttonName
       );
       return 0;
@@ -59,18 +59,18 @@ var service = {
           window.open('ntermin.html', '_self', 'location=yes');
         } else {
           navigator.notification.alert(
-            'Warning',  // message
+            data.AuthenticationResult.Message,  // message
             function(){},         // callback
-            data.AuthenticationResult.Message,            // title
+            'Warning',            // title
             'Ok'                  // buttonName
           );
         }
       },
       error: function (err) {
         navigator.notification.alert(
-          'Warning',  // message
+          'Error',  // message
           function(){},         // callback
-          'Error',            // title
+          'Warning',            // title
           'Ok'                  // buttonName
         );
       }
@@ -92,18 +92,18 @@ var service = {
           window.open('ntermin.html', '_self', 'location=yes');
         } else {
           navigator.notification.alert(
-            'Warning',  // message
+            data.AuthenticationResult.Message,  // message
             function(){},         // callback
-            data.AuthenticationResult.Message,            // title
+            'Warning',            // title
             'Ok'                  // buttonName
           );
         }
       },
       error: function (err) {
         navigator.notification.alert(
-          'Warning',  // message
+          'Error',  // message
           function(){},         // callback
-          'Error',            // title
+          'Warning',            // title
           'Ok'                  // buttonName
         );
       }
@@ -157,9 +157,9 @@ var service = {
       error: function (err) {
         console.log(err);
         navigator.notification.alert(
-          'Warning',  // message
+          'Error',  // message
           function(){},         // callback
-          'Error',            // title
+          'Warning',            // title
           'Ok'                  // buttonName
         );
       }
