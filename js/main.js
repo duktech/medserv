@@ -4,6 +4,10 @@ var helper = {
       return localStorage.userToken;
     }
     return false;
+  },
+  logOut: function(){
+    localStorage.removeItem('userToken');
+    window.open('index.html', '_self', 'location=yes');
   }
 };
 var service = {
