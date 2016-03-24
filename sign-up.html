@@ -38,10 +38,11 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="NAME">
-					<input type="text" class="form-control" placeholder="E-MAIL">
-					<input type="password" class="form-control" placeholder="PASSWORD">
-					<input type="password" class="form-control" placeholder="CONFIRM PASSWORD">
+					<input type="text" class="form-control" id="user_first_name" placeholder="FIRST NAME">
+					<input type="text" class="form-control" id="user_last_name" placeholder="LAST NAME">
+					<input type="text" class="form-control" id="user_email" placeholder="E-MAIL">
+					<input type="password" class="form-control" id="user_pswd" placeholder="PASSWORD">
+					<input type="password" class="form-control" id="user_cpswd" placeholder="CONFIRM PASSWORD">
 				</div>
 			</div>
 		</div>
@@ -102,7 +103,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12"> 
-				<button class="btn-ghost" onclick="window.open('ntermin.html', '_self', 'location=yes');">Sign up</button>
+				<button class="btn-ghost" onclick="service.user_register($('#user_first_name').val(),$('#user_last_name').val(),$('#user_email').val(),$('#user_pswd').val(),$('#user_cpswd').val());">Sign up</button>
 			</div>
 		</div>
 
@@ -120,6 +121,15 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
+
+	<script src="js/moment.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript">
+		var current_user = helper.get_current_user();
+		if(current_user){//logged in
+			window.open('ntermin.html', '_self', 'location=yes');
+		}
+	</script>
 </body>
 
 </html>

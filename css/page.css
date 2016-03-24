@@ -776,3 +776,10 @@ input.cmn-toggle-round-flat + label::before {
 		margin-top: 0px;
 	}
 }
+
+.fixed_bottom{
+	position: fixed;
+	bottom: 10px;
+	left: 50%;
+	transform: translatex(-50%);
+}

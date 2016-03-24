@@ -69,61 +69,8 @@
 
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="notification-wrapper">
-					<div class="alert alert-warning" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon" />
-						<table class="notification-text">
-							<tr>
-								<td class="op">Datum:</td>
-								<td class="opval">21 FEB</td>
-							</tr>
-							<tr>
-								<td class="op">Uhr:</td>
-								<td class="opval">9:00</td>
-							</tr>
-							<tr>
-								<td class="op">Hausarzt:</td>
-								<td class="opval">Behandlung - Migräne</td>
-							</tr>
-						</table>
-					</div>
-					<div class="alert alert-warning" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon" />
-						<table class="notification-text">
-							<tr>
-								<td class="op">Datum:</td>
-								<td class="opval">21 FEB</td>
-							</tr>
-							<tr>
-								<td class="op">Uhr:</td>
-								<td class="opval">9:00</td>
-							</tr>
-							<tr>
-								<td class="op">Hausarzt:</td>
-								<td class="opval">Behandlung - Migräne</td>
-							</tr>
-						</table>
-					</div>
-					<div class="alert alert-warning" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon" />
-						<table class="notification-text">
-							<tr>
-								<td class="op">Datum:</td>
-								<td class="opval">21 FEB</td>
-							</tr>
-							<tr>
-								<td class="op">Uhr:</td>
-								<td class="opval">9:00</td>
-							</tr>
-							<tr>
-								<td class="op">Hausarzt:</td>
-								<td class="opval">Behandlung - Migräne</td>
-							</tr>
-						</table>
-					</div>
+				<div class="notification-wrapper termine_page">
+
 					<div class="alert alert-success" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<img src="img/gplus.png" alt="Tooth-Icon" class="notification-icon" />
@@ -162,44 +109,7 @@
 							</tr>
 						</table>
 					</div>
-					<div class="alert alert-danger" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<img src="img/rplus.png" alt="Tooth-Icon" class="notification-icon" />
-						<table class="notification-text">
-							<td></td>
-							<tr>
-								<td class="op">Datum:</td>
-								<td class="opval">21 FEB</td>
-							</tr>
-							<tr>
-								<td class="op">Uhr:</td>
-								<td class="opval">9:00</td>
-							</tr>
-							<tr>
-								<td class="op">Hausarzt:</td>
-								<td class="opval">Behandlung - Migräne</td>
-							</tr>
-						</table>
-					</div>
-					<div class="alert alert-danger" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<img src="img/rplus.png" alt="Tooth-Icon" class="notification-icon" />
-						<table class="notification-text">
-							<td></td>
-							<tr>
-								<td class="op">Datum:</td>
-								<td class="opval">21 FEB</td>
-							</tr>
-							<tr>
-								<td class="op">Uhr:</td>
-								<td class="opval">9:00</td>
-							</tr>
-							<tr>
-								<td class="op">Hausarzt:</td>
-								<td class="opval">Behandlung - Migräne</td>
-							</tr>
-						</table>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -217,6 +127,12 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
+
+	<script src="js/moment.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript">
+		service.get_bookings_for_user();
+	</script>
 </body>
 
 </html>
