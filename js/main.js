@@ -13,21 +13,30 @@ var helper = {
 var service = {
   user_register: function (firstname, lastname, email, pswd, cpswd) {
     if(firstname == '' || lastname == '' || email == '' || pswd == '' || cpswd == ''){
-      //alert('All fields are mandatory!');
       navigator.notification.alert(
-        'You are the winner!',  // message
+        'Warning',  // message
         function(){},         // callback
-        'Game Over',            // title
-        'Done'                  // buttonName
+        'All fields are mandatory!',            // title
+        'Ok'                  // buttonName
       );
       return 0;
     }
     if($('#terms-checkbox').prop('checked') == false){
-      alert('You must agree to terms!');
+      navigator.notification.alert(
+        'Warning',  // message
+        function(){},         // callback
+        'You must agree to terms!',            // title
+        'Ok'                  // buttonName
+      );
       return 0;
     }
     if(pswd != cpswd){
-      alert('Passwords does not match!');
+      navigator.notification.alert(
+        'Warning',  // message
+        function(){},         // callback
+        'Passwords does not match!',            // title
+        'Ok'                  // buttonName
+      );
       return 0;
     }
     $.ajax({
@@ -49,11 +58,21 @@ var service = {
           localStorage.userToken = data.AuthenticationResult.Token;
           window.open('ntermin.html', '_self', 'location=yes');
         } else {
-          alert(data.AuthenticationResult.Message);
+          navigator.notification.alert(
+            'Warning',  // message
+            function(){},         // callback
+            data.AuthenticationResult.Message,            // title
+            'Ok'                  // buttonName
+          );
         }
       },
       error: function (err) {
-        alert('Error');
+        navigator.notification.alert(
+          'Warning',  // message
+          function(){},         // callback
+          'Error',            // title
+          'Ok'                  // buttonName
+        );
       }
     });
   },
@@ -72,11 +91,21 @@ var service = {
           localStorage.userToken = data.AuthenticationResult.Token;
           window.open('ntermin.html', '_self', 'location=yes');
         } else {
-          alert(data.AuthenticationResult.Message);
+          navigator.notification.alert(
+            'Warning',  // message
+            function(){},         // callback
+            data.AuthenticationResult.Message,            // title
+            'Ok'                  // buttonName
+          );
         }
       },
       error: function (err) {
-        alert('Error');
+        navigator.notification.alert(
+          'Warning',  // message
+          function(){},         // callback
+          'Error',            // title
+          'Ok'                  // buttonName
+        );
       }
     });
   },
@@ -127,7 +156,12 @@ var service = {
       },
       error: function (err) {
         console.log(err);
-        alert('Error');
+        navigator.notification.alert(
+          'Warning',  // message
+          function(){},         // callback
+          'Error',            // title
+          'Ok'                  // buttonName
+        );
       }
     });
   }
