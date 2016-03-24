@@ -13,8 +13,7 @@
 			DUK TECH
 		</author>
 		
-		<plugin name="com.developersanddesigners.phonegapdialogs" spec="1.1.1" source="pgb" />
-		<gap:plugin name="com.developersanddesigners.phonegapdialogs"/>
+		<gap:plugin name="org.apache.cordova.dialogs" />
 		
 		<preference name="phonegap-version" value="cli-5.2.0" />
 		<preference name="orientation" value="default" />

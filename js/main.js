@@ -16,7 +16,7 @@ var service = {
       //alert('All fields are mandatory!');
       navigator.notification.alert(
         'You are the winner!',  // message
-        //null,         // callback
+        function(){},         // callback
         'Game Over',            // title
         'Done'                  // buttonName
       );
