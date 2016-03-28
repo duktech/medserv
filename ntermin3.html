@@ -123,12 +123,12 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="btn-list">
-					<button class="btn-ghost btn-l" data-toggle="modal" data-target="#rezept">Rezept</button>
-					<button class="btn-ghost btn-l" onclick="window.open('#', '_self', 'location=yes');">Krankenschein</button>
-					<button class="btn-ghost btn-l" data-toggle="modal" data-target="#behandlung">Behandlung</button>
-					<button class="btn-ghost btn-l" onclick="window.open('#', '_self', 'location=yes');">Routinekontrolle</button>
-					<button class="btn-ghost btn-l" onclick="window.open('#', '_self', 'location=yes');">Andere</button>
+				<div class="btn-list service_categories">
+					<!--<button class="btn-ghost btn-l" data-toggle="modal" data-target="#rezept">Rezept</button>-->
+					<!--<button class="btn-ghost btn-l" onclick="window.open('#', '_self', 'location=yes');">Krankenschein</button>-->
+					<!--<button class="btn-ghost btn-l" data-toggle="modal" data-target="#behandlung">Behandlung</button>-->
+					<!--<button class="btn-ghost btn-l" onclick="window.open('#', '_self', 'location=yes');">Routinekontrolle</button>-->
+					<!--<button class="btn-ghost btn-l" onclick="window.open('#', '_self', 'location=yes');">Andere</button>-->
 				</div>
 			</div>
 		</div>
@@ -237,7 +237,7 @@
 	<script type="text/javascript">
 		var categ_id = helper.getParameterByName('categ_id');
 		if (categ_id != null) {
-			alert(categ_id);
+			service.GetProviderServiceCategories();
 		}
 	</script>
 </body>

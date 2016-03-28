@@ -202,6 +202,55 @@ var service = {
           'Ok'                  // buttonName
         );
       }
-  });
+    });
+  },
+  GetProviderServiceCategories: function(){
+    $.ajax({
+      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetProviderServiceCategories',
+      type: 'GET',
+      data: {name: 'Dr-Silvana-Scherb'},
+      success: function (data) {
+        console.log('GetProviderServiceCategories',data);
+        if (data.Status == 1) {
+          var html = '';
+          $.each(data.ServiceCategoryList,function(index,elem){
+            html += '<button class="btn-ghost btn-l" onclick="service.GetServicesByCategory('+elem.Id+');">'+elem.Name+'</button>';
+          });
+          $('.btn-list.service_categories').append(html);
+        }
+
+      },
+      error: function (err) {
+        console.log(err);
+        navigator.notification.alert(
+          'Error',  // message
+          function(){},         // callback
+          'Warning',            // title
+          'Ok'                  // buttonName
+        );
+      }
+    });
+  },
+  GetServicesByCategory: function(Id){
+    $.ajax({
+      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetServicesByCategory',
+      type: 'GET',
+      data: {id: Id},
+      success: function (data) {
+        console.log('GetServicesByCategory',data);
+        if (data.Status == 1) {
+
+        }
+      },
+      error: function (err) {
+        console.log(err);
+        navigator.notification.alert(
+          'Error',  // message
+          function(){},         // callback
+          'Warning',            // title
+          'Ok'                  // buttonName
+        );
+      }
+    });
   }
 };
