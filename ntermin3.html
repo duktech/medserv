@@ -198,6 +198,9 @@
 	<script type="text/javascript">
 		var provider_category_id = localStorage.provider_category_id;
 		var provider_category_name = localStorage.provider_category_name;
+		localStorage.removeItem('current_service_id');
+		localStorage.removeItem('current_service_name');
+		localStorage.removeItem('current_service_description');
 		$('.step1text').text(provider_category_name);
 		if (provider_category_id != null) {
 			service.GetProviderServiceCategories();
