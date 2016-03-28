@@ -31,6 +31,7 @@ body {
 
 .navbar-toggle {
 	border: 0;
+	display: block;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
