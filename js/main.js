@@ -116,6 +116,15 @@ var service = {
     });
   },
   user_login: function (email, pswd) {
+    if(email == '' || pswd == ''){
+      navigator.notification.alert(
+        'Both fields are mandatory!',  // message
+        function(){},         // callback
+        'Warning',            // title
+        'Ok'                  // buttonName
+      );
+      return 0;
+    }
     $.ajax({
       url: 'http://medserv.duk-tech.com/WS/Service.svc/Login',
       type: 'POST',
