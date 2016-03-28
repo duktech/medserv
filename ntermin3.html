@@ -78,7 +78,7 @@
 								<div class="progress-bar"></div>
 							</div>
 							<a href="#" class="bs-wizard-dot"></a>
-							<div class="bs-wizard-info text-center">HAUSARZT</div>
+							<div class="bs-wizard-info text-center step1text"></div>
 						</div>
 
 						<div class="col-xs-3 bs-wizard-step complete">
@@ -89,7 +89,7 @@
 							</div>
 							<a href="#" class="bs-wizard-dot"></a>
 							<div class="bs-wizard-info text-center">
-								<div class="behandlung"></div>
+								<div class="behandlung step2text"></div>
 							</div>
 						</div>
 
@@ -135,24 +135,24 @@
 		<div class="row">
 			<div class="col-xs-12 nav-btn">
 				<button class="round-btn pull-left" onclick="window.open('ntermin2.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
-				<button class="round-btn pull-right" onclick="window.open('calendar.html?namepost=' + $('.behandlung').text(), '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+				<button class="round-btn pull-right" onclick="helper.go_to_calendar();"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 			</div>
 		</div>
 		<!-- Modal -->
-		<div id="rezept" class="modal fade" role="dialog">
+		<div id="no_service_modal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Rezept</h4>
+						<h4 class="modal-title">Title</h4>
 					</div>
 					<div class="modal-body">
-						<textarea rows="10"></textarea>
+						<textarea rows="10" id="other_service_id"></textarea>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Submit</button>
+						<button type="button" class="btn btn-default pull-left" data-dismiss="modal" onclick="helper.add_service_description($('#other_service_id').val())">Submit</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
@@ -160,7 +160,7 @@
 			</div>
 		</div>
 		<!-- Modal -->
-		<div id="behandlung" class="modal fade" role="dialog">
+		<div id="has_service_modal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -171,24 +171,6 @@
 					</div>
 					<div class="modal-body">
 						<ul class="modal-list">
-							<li>
-								<button class="erkaltung btn-nstyle">Erkältung</button>
-							</li>
-							<li>
-								<button class="ubelkeit btn-nstyle">Übelkeit &amp; Erbrechen </button>
-							</li>
-							<li>
-								<button class="migrane btn-nstyle">Migräne</button>
-							</li>
-							<li>
-								<button class="verletzung btn-nstyle">Verletzung</button>
-							</li>
-							<li>
-								<button class="schnittwunde btn-nstyle">Schnittwunde</button>
-							</li>
-							<li>
-								<button class="fieber btn-nstyle">Fieber</button>
-							</li>
 						</ul>
 					</div>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
@@ -211,32 +193,13 @@
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
 	<script src="js/vlad.js"></script>
-	<!-- MODAL BUTTONS -->
-	<script>
-		$(".migrane").click(function () {
-			$(".behandlung").text("Migrane");
-		});
-		$(".erkaltung").click(function () {
-			$(".behandlung").text("Erkältung");
-		});
-		$(".ubelkeit").click(function () {
-			$(".behandlung").text("Übelkeit und Erbrechen");
-		});
-		$(".verletzung").click(function () {
-			$(".behandlung").text("Verletzung");
-		});
-		$(".schnittwunde").click(function () {
-			$(".behandlung").text("Schnittwunde");
-		});
-		$(".fieber").click(function () {
-			$(".behandlung").text("Fieber");
-		});
-	</script>
 
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
-		var categ_id = helper.getParameterByName('categ_id');
-		if (categ_id != null) {
+		var provider_category_id = localStorage.provider_category_id;
+		var provider_category_name = localStorage.provider_category_name;
+		$('.step1text').text(provider_category_name);
+		if (provider_category_id != null) {
 			service.GetProviderServiceCategories();
 		}
 	</script>

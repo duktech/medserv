@@ -10,17 +10,43 @@ var helper = {
     window.open('index.html', '_self', 'location=yes');
   },
   open_ntermin3page: function(categ_id){
-    window.open('ntermin3.html?categ_id='+categ_id, '_self', 'location=yes');
+    localStorage.provider_category_id = categ_id;
+    localStorage.provider_category_name = $('.provider_categ_btn[data-id="'+categ_id+'"]').text();
+    window.open('ntermin3.html', '_self', 'location=yes');
   },
-  getParameterByName: function(name, url){
-    if (!url) url = window.location.href;
-    url = url.toLowerCase(); // This is just to avoid case sensitiveness
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  service_select: function(service_id, service_name,navigate){
+    localStorage.current_service_id = service_id;
+    localStorage.current_service_name = service_name;
+    localStorage.removeItem('current_service_description');
+    $('.step2text').text(service_name);
+    if(navigate === true) {
+      this.go_to_calendar();
+    }
+  },
+  add_service_description: function(desc){
+    if(desc != '') {
+      localStorage.current_service_description = desc;
+      this.go_to_calendar();
+    }else{
+      navigator.notification.alert(
+        'Please add service description!',  // message
+        function(){},         // callback
+        'Warning',            // title
+        'Ok'                  // buttonName
+      );
+    }
+  },
+  go_to_calendar: function(){
+    if(localStorage.current_service_id){
+      window.open('calendar.html', '_self', 'location=yes');
+    }else{
+      navigator.notification.alert(
+        'Please select a service!',  // message
+        function(){},         // callback
+        'Warning',            // title
+        'Ok'                  // buttonName
+      );
+    }
   }
 };
 var service = {
@@ -187,7 +213,7 @@ var service = {
           var html = '';
           $.each(data.SearchCategory,function(index,elem){
             console.log(elem);
-            html += '<div class="col-xs-6 "><button class="btn-default btn-choice" onclick="helper.open_ntermin3page('+elem.Id+');"><img src="img/mficon.png">'+elem.DefaultName+'</button></div>';
+            html += '<div class="col-xs-6 "><button class="btn-default btn-choice provider_categ_btn" data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+');"><img src="img/mficon.png">'+elem.DefaultName+'</button></div>';
           });
           $('.categories_container').append(html);
         }
@@ -239,7 +265,20 @@ var service = {
       success: function (data) {
         console.log('GetServicesByCategory',data);
         if (data.Status == 1) {
-
+          if(data.ServiceList.length > 1){//has services
+            var html = '';
+            $.each(data.ServiceList, function(index, elem){
+              html += '<li><button class="btn-nstyle" onclick="helper.service_select('+elem.Id+',\'' + elem.Name + '\', true);">'+elem.Name+'</button></li>';
+            });
+            //modal-list
+            $('#has_service_modal .modal-list').html('');
+            $('#has_service_modal .modal-list').append(html);
+            $('#has_service_modal').modal().show();
+          }else{//no service
+            helper.service_select(data.ServiceList[0].Id,data.ServiceList[0].Name);
+            $('#no_service_modal .modal-header .modal-title').text(data.ServiceList[0].Name);
+            $('#no_service_modal').modal().show();
+          }
         }
       },
       error: function (err) {
