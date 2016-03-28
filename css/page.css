@@ -783,3 +783,6 @@ input.cmn-toggle-round-flat + label::before {
 	left: 50%;
 	transform: translatex(-50%);
 }
+.categories_container .btn-choice{
+	margin-bottom: 15px;
+}

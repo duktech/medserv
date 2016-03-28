@@ -72,13 +72,13 @@
 				<h1 class="content-title mt-top">Was für einen Termin wünschen sie?</h1>
 			</div>
 		</div>
-		<div class="row button-wrapper">
-			<div class="col-xs-6 ">
-				<button class="btn-default btn-choice" onclick="window.open('ntermin3.html', '_self', 'location=yes');"><img src="img/mficon.png" />HAUSARZT</button>
-			</div>
-			<div class="col-xs-6">
-				<button class="btn-default btn-choice" onclick="window.open('termine.html', '_self', 'location=yes');"><img src="img/deicon.png" />ZAHNARZT</button>
-			</div>
+		<div class="row button-wrapper categories_container">
+			<!--<div class="col-xs-6 ">-->
+				<!--<button class="btn-default btn-choice" onclick="window.open('ntermin3.html', '_self', 'location=yes');"><img src="img/mficon.png" />HAUSARZT</button>-->
+			<!--</div>-->
+			<!--<div class="col-xs-6">-->
+				<!--<button class="btn-default btn-choice" onclick="window.open('termine.html', '_self', 'location=yes');"><img src="img/deicon.png" />ZAHNARZT</button>-->
+			<!--</div>-->
 		</div>
 		<div class="row">
 			<div class="col-xs-12 nav-btn">
@@ -100,6 +100,16 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
+
+	<script src="js/main.js"></script>
+	<script type="text/javascript">
+		var current_user = helper.get_current_user();
+		if(current_user){//logged in
+			service.getAllCategories();
+		}else{
+			window.open('index.html', '_self', 'location=yes');
+		}
+	</script>
 </body>
 
 </html>
