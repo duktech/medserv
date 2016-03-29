@@ -47,6 +47,65 @@ var helper = {
         'Ok'                  // buttonName
       );
     }
+  },
+  go_to_schedule: function(){
+    if(localStorage.selectedDate && localStorage.dailySchedule){
+      window.open('schedule.html', '_self', 'location=yes');
+    }else{
+      navigator.notification.alert(
+        'Please select a date!',  // message
+        function(){},         // callback
+        'Warning',            // title
+        'Ok'                  // buttonName
+      );
+    }
+  },
+  go_to_sumar: function(){
+    if(localStorage.selectedHour){
+      window.open('sumar.html', '_self', 'location=yes');
+    }else{
+      navigator.notification.alert(
+        'Please select a hour!',  // message
+        function(){},         // callback
+        'Warning',            // title
+        'Ok'                  // buttonName
+      );
+    }
+  },
+  showHours: function(){
+    var dailySchedule = JSON.parse(localStorage.dailySchedule);
+    var leftSide = dailySchedule.splice(0, Math.floor(dailySchedule.length / 2));
+    var html = '';
+    for(var i= 0,j=0;i<leftSide.length, j<dailySchedule.length;i++,j++){
+      html += '<tr>';
+      if(leftSide[i]){
+        html += '<td><a href="#" class="time-hr cnone" data-time="'+leftSide[i].Time+'">'+leftSide[i].TimeToString+'</a></td>';
+        var cclass = 'nava';
+        if(leftSide[i].IsAvailable){
+          cclass = 'ava';
+        }
+        html += '<td><div class="'+cclass+'"></div></td>';
+      }else{
+        html += '<td colspan="2"> </td>';
+      }
+      if(dailySchedule[j]){
+        html += '<td><a href="#" class="time-hr cnone" data-time="'+dailySchedule[j].Time+'">'+dailySchedule[j].TimeToString+'</a></td>';
+        var cclass = 'nava';
+        if(dailySchedule[j].IsAvailable){
+          cclass = 'ava';
+        }
+        html += '<td><div class="'+cclass+'"></div></td>';
+      }else{
+        html += '<td colspan="2"> </td>';
+      }
+      html += '</tr>';
+    }
+    $('.schedule-tab').append(html);
+    $('.schedule-tab .cnone').click(function(){
+      $('.schedule-tab .cnone').removeClass('active');
+      $(this).addClass('active');
+      localStorage.selectedHour = $(this).attr('data-time');
+    });
   }
 };
 var service = {
@@ -249,7 +308,7 @@ var service = {
         if (data.Status == 1) {
           var html = '';
           $.each(data.ServiceCategoryList,function(index,elem){
-            html += '<button class="btn-ghost btn-l" onclick="service.GetServicesByCategory('+elem.Id+');">'+elem.Name+'</button>';
+            html += '<button class="btn-ghost btn-l" onclick="service.GetServicesByCategory('+elem.Id+',\'' + elem.Name + '\');">'+elem.Name+'</button>';
           });
           $('.btn-list.service_categories').append(html);
         }
@@ -266,7 +325,8 @@ var service = {
       }
     });
   },
-  GetServicesByCategory: function(Id){
+  GetServicesByCategory: function(Id, name){
+    localStorage.serviceCategoryName = name;
     $.ajax({
       url: 'http://medserv.duk-tech.com/WS/Service.svc/GetServicesByCategory',
       type: 'GET',
@@ -292,6 +352,199 @@ var service = {
       },
       error: function (err) {
         console.log(err);
+        navigator.notification.alert(
+          'Error',  // message
+          function(){},         // callback
+          'Warning',            // title
+          'Ok'                  // buttonName
+        );
+      }
+    });
+  },
+  GetNewScheduleBookingScreen: function () {
+
+    $.ajax({
+      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetNewScheduleBookingScreen',
+      type: 'POST',
+      data: JSON.stringify({
+        Token: localStorage.userToken,
+        serviceId: localStorage.current_service_id,
+        resourceIds: ''
+      }),
+      contentType: 'application/json',
+      success: function (data) {
+        console.log('GetNewScheduleBookingScreen', data);
+        if (data.Status == 1) {
+          var resources = [];
+          var active_days = data.BookingScreen.WeeklySchedule;
+          var service_duration = data.BookingScreen.Service.Duration;
+          $.each(data.BookingScreen.Resources, function(index, elem){
+            var res = {id: elem.Id, type: elem.ResourceTypeId};
+            resources.push(res);
+          });
+          var groupBy = function(myarray, key) {
+            return myarray.reduce(function(rv, x) {
+              (rv[x[key]] = rv[x[key]] || []).push(x);
+              return rv;
+            }, {});
+          };
+          var res_final = groupBy(resources, 'type');
+          var resources_string = '';
+          var i = 0;
+          $.each(res_final, function (index, elem) {
+            i++;
+            $.each(elem, function (ind, e) {
+              resources_string += e.id;
+              if((ind +1 ) == elem.length && i < Object.keys(res_final).length){
+                resources_string += '-';
+              }else if((ind +1 ) < elem.length){
+                resources_string += ',';
+              }
+            });
+          });
+          localStorage.serviceResources = resources_string;
+          $(".responsive-calendar").responsiveCalendar({
+            onDayClick: function (events) {
+              if($(this).parent().hasClass('active')){
+                var postdate = $(this).attr("data-month") + "/" + $(this).attr("data-day") + "/" + $(this).attr("data-year");
+                service.GetDailyScheduleForClientBooking_V2(postdate, service_duration);
+              }else{
+                navigator.notification.alert(
+                  'Please select only active days!',  // message
+                  function(){},         // callback
+                  'Warning',            // title
+                  'Ok'                  // buttonName
+                );
+              }
+            }
+
+          });
+          setTimeout(function(){
+            $.each(active_days, function(index, elem){
+              switch(elem){
+                case 1:
+                  $('.responsive-calendar .day.mon.today').addClass('active');
+                  $('.responsive-calendar .day.mon.future').addClass('active');
+                  break;
+                case 2:
+                  $('.responsive-calendar .day.tue.today').addClass('active');
+                  $('.responsive-calendar .day.tue.future').addClass('active');
+                  break;
+                case 3:
+                  $('.responsive-calendar .day.wed.today').addClass('active');
+                  $('.responsive-calendar .day.wed.future').addClass('active');
+                  break;
+                case 4:
+                  $('.responsive-calendar .day.thu.today').addClass('active');
+                  $('.responsive-calendar .day.thu.future').addClass('active');
+                  break;
+                case 5:
+                  $('.responsive-calendar .day.fri.today').addClass('active');
+                  $('.responsive-calendar .day.fri.future').addClass('active');
+                  break;
+                case 6:
+                  $('.responsive-calendar .day.sat.today').addClass('active');
+                  $('.responsive-calendar .day.sat.future').addClass('active');
+                  break;
+                case 7:
+                  $('.responsive-calendar .day.sun.today').addClass('active');
+                  $('.responsive-calendar .day.sun.future').addClass('active');
+                  break;
+              }
+            });
+          },100)
+
+        }
+
+      },
+      error: function (err) {
+        navigator.notification.alert(
+          'Error',  // message
+          function(){},         // callback
+          'Warning',            // title
+          'Ok'                  // buttonName
+        );
+      }
+    });
+  },
+  GetDailyScheduleForClientBooking_V2: function(date, service_duration){
+    if(!date){
+      return;
+    }
+    if(!service_duration){
+      service_duration = 30;
+    }
+    $.ajax({
+      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetDailyScheduleForClientBooking_V2',
+      type: 'GET',
+      data: {
+        Token: localStorage.userToken,
+        serviceId: localStorage.current_service_id,
+        resourcesFormat: localStorage.serviceResources,
+        selectedDate: date,
+        bookingDuration : service_duration,
+        bookingId: 0
+      },
+      success: function (data) {
+        console.log('GetDailyScheduleForClientBooking_V2',data);
+        if (data.Status == 1) {
+          if(data.DailySchedule.length > 0){
+            localStorage.selectedDate = date;
+            localStorage.dailySchedule = JSON.stringify(data.DailySchedule);
+          }else{
+            navigator.notification.alert(
+              'You can not book this day. Please select another date!',  // message
+              function(){},         // callback
+              'Warning',            // title
+              'Ok'                  // buttonName
+            );
+          }
+        }
+      },
+      error: function (err) {
+        console.log(err);
+        navigator.notification.alert(
+          'Error',  // message
+          function(){},         // callback
+          'Warning',            // title
+          'Ok'                  // buttonName
+        );
+      }
+    });
+  },
+  CustomerBookingRequestMobile: function () {
+
+    var userToken = localStorage.userToken;
+    var current_service_id = localStorage.current_service_id;
+    var selectedHour = localStorage.selectedHour;
+
+    var date = eval("new " + selectedHour.slice(1, -1));
+    var moment_date = moment(date).format('DD-MM-YYYY HH:mm');
+    console.log(moment_date);
+    $.ajax({
+      url: 'http://medserv.duk-tech.com/WS/Service.svc/CustomerBookingRequestMobile',
+      type: 'POST',
+      data: JSON.stringify({
+        Token: userToken,
+        serviceId: current_service_id,
+        bookingDate: moment_date,
+        resourcesIds: []
+      }),
+      contentType: 'application/json',
+      success: function (data) {
+        console.log('CustomerBookingRequestMobile',data);
+        if (data.Status == "1") { //if success
+          window.open('success.html', '_self', 'location=yes');
+        } else {
+          navigator.notification.alert(
+            data.Message,  // message
+            function(){},         // callback
+            'Warning',            // title
+            'Ok'                  // buttonName
+          );
+        }
+      },
+      error: function (err) {
         navigator.notification.alert(
           'Error',  // message
           function(){},         // callback

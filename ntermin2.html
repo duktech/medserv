@@ -107,6 +107,16 @@
 	<script type="text/javascript">
 		var current_user = helper.get_current_user();
 		if(current_user){//logged in
+			localStorage.removeItem('provider_category_id');
+			localStorage.removeItem('provider_category_name');
+			localStorage.removeItem('current_service_id');
+			localStorage.removeItem('current_service_name');
+			localStorage.removeItem('serviceCategoryName');
+			localStorage.removeItem('current_service_description');
+			localStorage.removeItem('selectedDate');
+			localStorage.removeItem('dailySchedule');
+			localStorage.removeItem('selectedHour');
+			localStorage.removeItem('serviceResources');
 			service.getAllCategories();
 		}else{
 			window.open('index.html', '_self', 'location=yes');

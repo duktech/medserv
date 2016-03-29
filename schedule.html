@@ -54,17 +54,19 @@
 								<div class="progress-bar"></div>
 							</div>
 							<a href="#" class="bs-wizard-dot"></a>
-							<div class="bs-wizard-info text-center">HAUSARZT</div>
+							<div class="bs-wizard-info text-center step1text"></div>
 						</div>
 
 						<div class="col-xs-3 bs-wizard-step complete">
 							<!-- complete -->
-							<div class="text-center bs-wizard-stepnum">BEHANDLUNG</div>
+							<div class="text-center bs-wizard-stepnum service_category_name">-</div>
 							<div class="progress">
 								<div class="progress-bar"></div>
 							</div>
 							<a href="#" class="bs-wizard-dot"></a>
-							<div class="bs-wizard-info text-center"><div class="behandlung main"></div></div>
+							<div class="bs-wizard-info text-center">
+								<div class="behandlung step2text"></div>
+							</div>
 						</div>
 
 						<div class="col-xs-3 bs-wizard-step active">
@@ -74,7 +76,7 @@
 								<div class="progress-bar"></div>
 							</div>
 							<a href="#" class="bs-wizard-dot"></a>
-							<div class="bs-wizard-info text-center"><div class="date-post main"></div></div>
+							<div class="bs-wizard-info text-center"><div class="date-post step3text"></div></div>
 						</div>
 
 						<div class="col-xs-3 bs-wizard-step disabled">
@@ -94,103 +96,11 @@
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<table class="schedule-tab">
-					<tr>
-						<td><a href="#" class="time-hr cnone">8:30</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-						<td><a href="#" class="time-hr cnone">13:30</a></td>
-						<td>
-							<div class="ava"></div>
-							<div class="nava"></div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="time-hr cnone">9:00</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-						<td><a href="#" class="time-hr cnone">14.00</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="time-hr cnone">9:30</a></td>
-						<td>
-							<div class="nava"></div>
-						</td>
-						<td><a href="#" class="time-hr cnone">14:30</a></td>
-						<td>
-							<div class="nava"></div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="time-hr cnone">10:00</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-						<td><a href="#" class="time-hr cnone">15:00</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-					</tr>
-					<tr>
-						<td ><a href="#" class="time-hr cnone">10:30</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-						<td><a href="#" class="time-hr cnone">15:30</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="time-hr cnone">11:00</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-						<td><a href="#" class="time-hr cnone">16:00</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="time-hr cnone">11:30</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-						<td><a href="#" class="time-hr cnone">16:30</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="time-hr cnone">12:00</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-						<td><a href="#" class="time-hr cnone">17:00</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="#" class="time-hr cnone">12:30</a></td>
-						<td>
-							<div class="ava">
-							</div>
-						</td>
-						<td><a href="#" class="time-hr cnone">17:30</a></td>
-						<td>
-							<div class="ava"></div>
-						</td>
-					</tr>
 				</table>
 				<div class="row">
 					<div class="col-xs-12 nav-btn">
-						<button class="round-btn pull-left" onclick="window.open('calendar.html?namepost=' + $('.behandlung').text() + '&postdate=' + $('.date-post').text() + '&hrpost='+hrpost, '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
-						<button class="round-btn pull-right" onclick="window.open('sumar.html?namepost=' + $('.behandlung').text() + '&postdate=' + $('.date-post').text() + '&hrpost='+hrpost, '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+						<button class="round-btn pull-left" onclick="window.open('calendar.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+						<button class="round-btn pull-right" onclick="helper.go_to_sumar();"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 					</div>
 				</div>
 
@@ -212,49 +122,33 @@
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
 	<script src="js/vlad.js"></script>
-	</script>
-	<script>
-		var hrpost;
-		$(document).ready(function () {
-	
-			var namepost = getParameterByName('namepost');
-			if (namepost != null){
-			$(".behandlung").text(namepost);
-			}
-			var postdate = getParameterByName('postdate');
-			if (postdate != null){
-			$(".date-post").text(postdate);
-			}
-			
-			$( ".time-hr" ).click(function() {
-				hrpost = $(this).text();
-				$(".time-hr").removeClass("cnonefocus");
-				$(this).addClass("cnonefocus");
-				
-			});
 
-			
-/*			var hrpost = getParameterByName('hrpost');
-			
-			
-			if (hrpost != null) {
-				$(this).text(hrpost);
-			//	alert(hrpost);
-			}*/
-			
-			
+	<script src="js/moment.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript">
+
+
+		$(document).ready(function () {
+			var userToken = localStorage.userToken;
+			var provider_category_id = localStorage.provider_category_id;
+			var provider_category_name = localStorage.provider_category_name;
+			var current_service_id = localStorage.current_service_id;
+			var current_service_name = localStorage.current_service_name;
+			var serviceCategoryName = localStorage.serviceCategoryName;
+			var current_service_description = localStorage.current_service_description;
+			var selectedDate = localStorage.selectedDate;
+			var dailySchedule = localStorage.dailySchedule;
+
+			localStorage.removeItem('selectedHour');
+
+			$('.step1text').text(provider_category_name);
+			$('.step2text').text(current_service_name);
+			$('.step3text').text(selectedDate);
+			$('.service_category_name').text(serviceCategoryName);
+			helper.showHours();
 		});
-		
-		function getParameterByName(name, url) {
-			if (!url) url = window.location.href;
-			url = url.toLowerCase(); // This is just to avoid case sensitiveness  
-			name = name.replace(/[\[\]]/g, "\\$&");
-			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-				results = regex.exec(url);
-			if (!results) return null;
-			if (!results[2]) return '';
-			return decodeURIComponent(results[2].replace(/\+/g, " "));
-		}
+
+
 	</script>
 </body>
 

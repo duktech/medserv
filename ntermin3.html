@@ -84,13 +84,13 @@
 
 						<div class="col-xs-3 bs-wizard-step complete">
 							<!-- complete -->
-							<div class="text-center bs-wizard-stepnum">BEHANDLUNG</div>
+							<div class="text-center bs-wizard-stepnum">-</div>
 							<div class="progress">
 								<div class="progress-bar"></div>
 							</div>
 							<a href="#" class="bs-wizard-dot"></a>
 							<div class="bs-wizard-info text-center">
-								<div class="behandlung step2text"></div>
+								<div class="behandlung step2text">-</div>
 							</div>
 						</div>
 
@@ -200,9 +200,16 @@
 	<script type="text/javascript">
 		var provider_category_id = localStorage.provider_category_id;
 		var provider_category_name = localStorage.provider_category_name;
+
 		localStorage.removeItem('current_service_id');
 		localStorage.removeItem('current_service_name');
+		localStorage.removeItem('serviceCategoryName');
 		localStorage.removeItem('current_service_description');
+		localStorage.removeItem('selectedDate');
+		localStorage.removeItem('dailySchedule');
+		localStorage.removeItem('selectedHour');
+		localStorage.removeItem('serviceResources');
+
 		$('.step1text').text(provider_category_name);
 		if (provider_category_id != null) {
 			service.GetProviderServiceCategories();

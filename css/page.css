@@ -603,7 +603,11 @@ input.cmn-toggle-round-flat + label::before {
 	display: inline-block;
 	font-weight: bold;
 }
-
+.s-content .service_name {
+	color: #e53935;
+	display: inline-block;
+	font-weight: bold;
+}
 .hidden {
 	display: none;
 }
@@ -611,7 +615,7 @@ input.cmn-toggle-round-flat + label::before {
 .cnone {
 	color: #283437;
 }
-.cnone:focus {
+.cnone.active {
 	color: #e53935;
 	text-decoration: none;
 }
