@@ -1,9 +1,10 @@
 body {
-	background: url(../img/page-bg.jpg) no-repeat top center scroll;
+	background: url(../img/page-bg.jpg) no-repeat 0 0 scroll;
 	font-family: "Helvetica", sans-serif;
 	font-size: 22px;
 	padding-top: 50px;
 	text-transform: uppercase;
+	background-size: 100%;
 }
 
 a {
