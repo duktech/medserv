@@ -1,6 +1,5 @@
 var helper = {
   set_calendar_active_days: function(days){
-    console.log('fct',days);
     setTimeout(function(){
       $.each(days, function(index, elem){
         switch(elem){
