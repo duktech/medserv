@@ -1,4 +1,41 @@
 var helper = {
+  set_calendar_active_days: function(days){
+    console.log('fct',days);
+    setTimeout(function(){
+      $.each(days, function(index, elem){
+        switch(elem){
+          case 1:
+            $('.responsive-calendar .day.mon.today').addClass('active');
+            $('.responsive-calendar .day.mon.future').addClass('active');
+            break;
+          case 2:
+            $('.responsive-calendar .day.tue.today').addClass('active');
+            $('.responsive-calendar .day.tue.future').addClass('active');
+            break;
+          case 3:
+            $('.responsive-calendar .day.wed.today').addClass('active');
+            $('.responsive-calendar .day.wed.future').addClass('active');
+            break;
+          case 4:
+            $('.responsive-calendar .day.thu.today').addClass('active');
+            $('.responsive-calendar .day.thu.future').addClass('active');
+            break;
+          case 5:
+            $('.responsive-calendar .day.fri.today').addClass('active');
+            $('.responsive-calendar .day.fri.future').addClass('active');
+            break;
+          case 6:
+            $('.responsive-calendar .day.sat.today').addClass('active');
+            $('.responsive-calendar .day.sat.future').addClass('active');
+            break;
+          case 7:
+            $('.responsive-calendar .day.sun.today').addClass('active');
+            $('.responsive-calendar .day.sun.future').addClass('active');
+            break;
+        }
+      });
+    },100);
+  },
   get_current_user: function () {
     if (localStorage.userToken) {
       return localStorage.userToken;
@@ -404,6 +441,7 @@ var service = {
           });
           localStorage.serviceResources = resources_string;
           $(".responsive-calendar").responsiveCalendar({
+            monthChangeAnimation: false,
             onDayClick: function (events) {
               if($(this).parent().hasClass('active')){
                 var postdate = $(this).attr("data-month") + "/" + $(this).attr("data-day") + "/" + $(this).attr("data-year");
@@ -416,44 +454,13 @@ var service = {
                   'Ok'                  // buttonName
                 );
               }
+            },
+            onMonthChange: function(){
+              helper.set_calendar_active_days(active_days);
             }
 
           });
-          setTimeout(function(){
-            $.each(active_days, function(index, elem){
-              switch(elem){
-                case 1:
-                  $('.responsive-calendar .day.mon.today').addClass('active');
-                  $('.responsive-calendar .day.mon.future').addClass('active');
-                  break;
-                case 2:
-                  $('.responsive-calendar .day.tue.today').addClass('active');
-                  $('.responsive-calendar .day.tue.future').addClass('active');
-                  break;
-                case 3:
-                  $('.responsive-calendar .day.wed.today').addClass('active');
-                  $('.responsive-calendar .day.wed.future').addClass('active');
-                  break;
-                case 4:
-                  $('.responsive-calendar .day.thu.today').addClass('active');
-                  $('.responsive-calendar .day.thu.future').addClass('active');
-                  break;
-                case 5:
-                  $('.responsive-calendar .day.fri.today').addClass('active');
-                  $('.responsive-calendar .day.fri.future').addClass('active');
-                  break;
-                case 6:
-                  $('.responsive-calendar .day.sat.today').addClass('active');
-                  $('.responsive-calendar .day.sat.future').addClass('active');
-                  break;
-                case 7:
-                  $('.responsive-calendar .day.sun.today').addClass('active');
-                  $('.responsive-calendar .day.sun.future').addClass('active');
-                  break;
-              }
-            });
-          },100)
-
+          helper.set_calendar_active_days(active_days);
         }
 
       },
