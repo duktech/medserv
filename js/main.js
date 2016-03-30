@@ -115,29 +115,34 @@ var helper = {
     for(var i= 0,j=0;i<leftSide.length, j<dailySchedule.length;i++,j++){
       html += '<tr>';
       if(leftSide[i]){
-        html += '<td><a href="#" class="time-hr cnone" data-time="'+leftSide[i].Time+'">'+leftSide[i].TimeToString+'</a></td>';
         var cclass = 'nava';
+        var disabled = 'disabled';
         if(leftSide[i].IsAvailable){
           cclass = 'ava';
+          disabled = '';
         }
-        html += '<td><div class="'+cclass+'"></div></td>';
+        html += '<td><div class="'+cclass+'"></div><a href="#" class="time-hr cnone '+disabled+'" data-time="'+leftSide[i].Time+'">'+leftSide[i].TimeToString+'</a></td>';
       }else{
-        html += '<td colspan="2"> </td>';
+        html += '<td> </td>';
       }
       if(dailySchedule[j]){
-        html += '<td><a href="#" class="time-hr cnone" data-time="'+dailySchedule[j].Time+'">'+dailySchedule[j].TimeToString+'</a></td>';
         var cclass = 'nava';
+        var disabled = 'disabled';
         if(dailySchedule[j].IsAvailable){
           cclass = 'ava';
+          disabled = '';
         }
-        html += '<td><div class="'+cclass+'"></div></td>';
+        html += '<td><div class="'+cclass+'"></div><a href="#" class="time-hr cnone '+disabled+'" data-time="'+dailySchedule[j].Time+'">'+dailySchedule[j].TimeToString+'</a></td>';
       }else{
-        html += '<td colspan="2"> </td>';
+        html += '<td> </td>';
       }
       html += '</tr>';
     }
     $('.schedule-tab').append(html);
     $('.schedule-tab .cnone').click(function(){
+      if($(this).hasClass('disabled')){
+        return 0;
+      }
       $('.schedule-tab .cnone').removeClass('active');
       $(this).addClass('active');
       localStorage.selectedHour = $(this).attr('data-time');
@@ -261,8 +266,9 @@ var service = {
       type: 'GET',
       data: {Token: token},
       success: function (data) {
+        console.log(data.BookingsList);
         if (data.Status == 1) {
-          var start_date = eval("new " + data.BookingsList[1].StartDate.slice(1, -1));
+          var start_date = eval("new " + data.BookingsList[data.BookingsList.length - 1].StartDate.slice(1, -1));
           var moment_date = moment(start_date);
           $(".ntermin .date-post").text(moment_date.format('l'));//data
           $(".ntermin .time-hr").text(moment_date.format('hh:mm'));//ora
@@ -272,25 +278,27 @@ var service = {
           $.each(data.BookingsList, function(index, elem){
             start_date = eval("new " + elem.StartDate.slice(1, -1));
             moment_date = moment(start_date);
-
-            html_history += '<div class="alert alert-warning" role="alert">';
-            html_history += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-            html_history += '<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon" />';
-            html_history += '<table class="notification-text">';
-            html_history += '<tr>';
-            html_history += '<td class="op">Datum:</td>';
-            html_history += '<td class="opval">'+moment_date.format('l')+'</td>';
-            html_history += '</tr>';
-            html_history += '<tr>';
-            html_history += '<td class="op">Uhr:</td>';
-            html_history += '<td class="opval">'+moment_date.format('hh:mm')+'</td>';
-            html_history += '</tr>';
-            html_history += '<tr>';
-            html_history += '<td class="op">Hausarzt:</td>';
-            html_history += '<td class="opval">'+elem.ServiceName+'</td>';
-            html_history += '</tr>';
-            html_history += '</table>';
-            html_history += '</div>';
+            var current_date = moment(new Date());
+            if(moment_date > current_date) {
+              html_history += '<div class="alert alert-warning" role="alert">';
+              //html_history += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+              html_history += '<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon" />';
+              html_history += '<table class="notification-text">';
+              html_history += '<tr>';
+              html_history += '<td class="op">Datum:</td>';
+              html_history += '<td class="opval">' + moment_date.format('l') + '</td>';
+              html_history += '</tr>';
+              html_history += '<tr>';
+              html_history += '<td class="op">Uhr:</td>';
+              html_history += '<td class="opval">' + moment_date.format('hh:mm') + '</td>';
+              html_history += '</tr>';
+              html_history += '<tr>';
+              html_history += '<td class="op">Hausarzt:</td>';
+              html_history += '<td class="opval">' + elem.ServiceName + '</td>';
+              html_history += '</tr>';
+              html_history += '</table>';
+              html_history += '</div>';
+            }
           });
 
           $('.notification-wrapper.termine_page').append(html_history);
@@ -317,7 +325,14 @@ var service = {
           var html = '';
           $.each(data.SearchCategory,function(index,elem){
             console.log(elem);
-            html += '<div class="col-xs-6 "><button class="btn-default btn-choice provider_categ_btn" data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+');"><img src="img/mficon.png">'+elem.DefaultName+'</button></div>';
+            var logo_link = '';
+            if(elem.Logo == ""){
+              logo_link = 'http://medserv.duk-tech.com/CmsData/no_image.jpg';
+            }else{
+              logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.Id+'/Logo/'+elem.Logo;
+            }
+
+            html += '<div class="col-xs-6 "><button class="btn-default btn-choice provider_categ_btn" data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+');"><img src="'+logo_link+'">'+elem.DefaultName+'</button></div>';
           });
           $('.categories_container').append(html);
         }

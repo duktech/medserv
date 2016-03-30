@@ -31,8 +31,9 @@ a:hover {
 .navbar-fixed-top {
 	background-color: #283437;
 	border: 0;
-	height: 50px;
+	height: 60px;
 	line-height: 50px;
+	padding-top: 10px;
 }
 
 .navbar-toggle {
@@ -138,7 +139,7 @@ a:hover {
 .glyphicon,
 .glyphicon-home {
 	color: #fff;
-	line-height: 40px;
+	line-height: 47px;
 }
 
 .form-control {
@@ -198,7 +199,9 @@ a:hover {
 	transform: translate(-50%, 0);
 	width: 300px;
 }
-
+.navbar-toggle{
+	margin-top: 6px;
+}
 .newsletter-group {
 	margin-top: 10%;
 	margin-left: auto;
@@ -260,11 +263,13 @@ input.cmn-toggle-round-flat + label::before {
 	max-width: 200px;
 	max-height: 200px;
 }
-
+.logo.img-button{
+	margin-top: 50px;
+}
 .ntermin {
 	color: #283437;
 	background: rgba(255, 255, 255, 0.4);
-	margin-top: 20%;
+	margin-top: 18%;
 }
 
 .ntermin h1 {
@@ -521,26 +526,29 @@ input.cmn-toggle-round-flat + label::before {
 
 .schedule-tab {
 	width: 100%;
+	margin-bottom: 20px;
 }
 
-.ava {
+div.ava {
 	background-color: #1cfc51;
 	border-radius: 50%;
-	display: block;
+	display: inline-block;
 	height: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 20px;
+	margin-right: 15px;
 }
 
-.nava {
+div.nava {
 	background-color: #fc1c1c;
 	border-radius: 50%;
-	display: block;
+	display: inline-block;
 	height: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	width: 20px;
+	margin-right: 15px;
 }
 
 .success-title {
@@ -623,6 +631,9 @@ input.cmn-toggle-round-flat + label::before {
 .cnonefocus {
 	color: #e53935;
 	text-decoration: none;
+}
+.cnone.disabled{
+	color: #a1a1a1;
 }
 .mpname {
 	font-family: "Helvetica", sans-serif;
@@ -784,13 +795,24 @@ input.cmn-toggle-round-flat + label::before {
 
 .fixed_bottom{
 	position: fixed;
-	bottom: 10px;
+	bottom: 50px;
 	left: 50%;
 	transform: translatex(-50%);
 }
 .categories_container .btn-choice{
 	margin-bottom: 15px;
+	position: relative;
 }
 .responsive-calendar .day a{
 	transition: all 0.5s ease-in-out;
+}
+.provider_categ_btn img{
+	max-width: 50px;
+	max-height: 50px;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	left: 10px;
 }
