@@ -525,8 +525,12 @@ input.cmn-toggle-round-flat + label::before {
 }
 
 .schedule-tab {
+	float: left;
 	width: 100%;
 	margin-bottom: 20px;
+}
+.clearfix{
+	clear: both;
 }
 
 div.ava {
@@ -550,7 +554,16 @@ div.nava {
 	width: 20px;
 	margin-right: 15px;
 }
-
+div.cava {
+	background-color: #fff;
+	border-radius: 50%;
+	display: inline-block;
+	height: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 20px;
+	margin-right: 15px;
+}
 .success-title {
 	font-family: "Helvetica", sans-serif;
 	margin-top: 40px;
@@ -815,4 +828,13 @@ div.nava {
 	bottom: 0;
 	margin: auto;
 	left: 10px;
+}
+.my_schedule_hour{
+	background: #1cfc51;
+}
+.my_schedule_hour.disabled{
+	background: #fc1c1c;
+}
+.schedule-tab tbody tr{
+	border: 1px solid;
 }

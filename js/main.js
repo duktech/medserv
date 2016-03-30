@@ -110,34 +110,24 @@ var helper = {
   },
   showHours: function(){
     var dailySchedule = JSON.parse(localStorage.dailySchedule);
-    var leftSide = dailySchedule.splice(0, Math.floor(dailySchedule.length / 2));
+
     var html = '';
-    for(var i= 0,j=0;i<leftSide.length, j<dailySchedule.length;i++,j++){
+    var service_duration = localStorage.service_duration;
+    $.each(dailySchedule, function(index, elem){
       html += '<tr>';
-      if(leftSide[i]){
-        var cclass = 'nava';
-        var disabled = 'disabled';
-        if(leftSide[i].IsAvailable){
-          cclass = 'ava';
-          disabled = '';
-        }
-        html += '<td><div class="'+cclass+'"></div><a href="#" class="time-hr cnone '+disabled+'" data-time="'+leftSide[i].Time+'">'+leftSide[i].TimeToString+'</a></td>';
-      }else{
-        html += '<td> </td>';
+      var cclass = 'nava';
+      var disabled = 'disabled';
+      if(elem.IsAvailable){
+        cclass = 'ava';
+        disabled = '';
       }
-      if(dailySchedule[j]){
-        var cclass = 'nava';
-        var disabled = 'disabled';
-        if(dailySchedule[j].IsAvailable){
-          cclass = 'ava';
-          disabled = '';
-        }
-        html += '<td><div class="'+cclass+'"></div><a href="#" class="time-hr cnone '+disabled+'" data-time="'+dailySchedule[j].Time+'">'+dailySchedule[j].TimeToString+'</a></td>';
-      }else{
-        html += '<td> </td>';
-      }
+      var start_date = eval("new " + elem.Time.slice(1, -1));
+      var moment_date = moment(start_date);
+
+      html += '<td><div class="'+cclass+'"></div><a href="#" class="time-hr cnone '+disabled+'" data-time="'+elem.Time+'" data-duration="'+service_duration+'">'+elem.TimeToString+'</a></td>';
+      html += '<td class="my_schedule_hour" data-time="'+elem.Time+'" data-duration="'+service_duration+'"></td>';
       html += '</tr>';
-    }
+    });
     $('.schedule-tab').append(html);
     $('.schedule-tab .cnone').click(function(){
       if($(this).hasClass('disabled')){
@@ -268,18 +258,37 @@ var service = {
       success: function (data) {
         console.log(data.BookingsList);
         if (data.Status == 1) {
-          var start_date = eval("new " + data.BookingsList[data.BookingsList.length - 1].StartDate.slice(1, -1));
-          var moment_date = moment(start_date);
-          $(".ntermin .date-post").text(moment_date.format('l'));//data
-          $(".ntermin .time-hr").text(moment_date.format('hh:mm'));//ora
-          $(".ntermin .behandlung").text(data.BookingsList[0].ServiceName);//medic
 
+          data.BookingsList.sort(function(a,b){
+            var start_date_a = eval("new " + a.StartDate.slice(1, -1));
+            var moment_date_a = moment(start_date_a);
+
+            var start_date_b = eval("new " + b.StartDate.slice(1, -1));
+            var moment_date_b = moment(start_date_b);
+
+            if(moment_date_a.isBefore(moment_date_b)){
+              return -1;
+            }
+            if(moment_date_a.isAfter(moment_date_b)){
+              return 1;
+            }
+            return 0;
+          });
+
+          var is_first_add_to_page = true;
           var html_history = '';
+          var html_schedule = '';
           $.each(data.BookingsList, function(index, elem){
-            start_date = eval("new " + elem.StartDate.slice(1, -1));
-            moment_date = moment(start_date);
+            var start_date = eval("new " + elem.StartDate.slice(1, -1));
+            var moment_date = moment(start_date);
             var current_date = moment(new Date());
             if(moment_date > current_date) {
+              if(is_first_add_to_page){
+                $(".ntermin .date-post").text(moment_date.format('l'));//data
+                $(".ntermin .time-hr").text(moment_date.format('hh:mm'));//ora
+                $(".ntermin .behandlung").text(elem.ServiceName);//medic
+                is_first_add_to_page = false;
+              }
               html_history += '<div class="alert alert-warning" role="alert">';
               //html_history += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
               html_history += '<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon" />';
@@ -298,6 +307,25 @@ var service = {
               html_history += '</tr>';
               html_history += '</table>';
               html_history += '</div>';
+
+
+              //for schedule below here
+              var selected_date = moment(localStorage.selectedDate);
+              if(selected_date.format('DD/MM/YYYY') == moment_date.format('DD/MM/YYYY')){
+                var service_start_date = moment(eval("new " + elem.StartDate.slice(1, -1)));
+                var service_end_date = moment(eval("new " + elem.EndDate.slice(1, -1)));
+                console.log(service_start_date, service_end_date);
+                $.each($('.my_schedule_hour'), function(index, schedule){
+                  var schedule_start_date = moment(eval("new " + $(schedule).attr('data-time').slice(1, -1)));
+                  var schedule_duration = $(schedule).attr('data-duration');
+                  var schedule_end_date = schedule_start_date.clone().add(schedule_duration,'minutes');
+
+                  if(schedule_start_date.isBefore(service_end_date) && service_start_date.isBefore(schedule_end_date)){
+                    $(this).addClass('disabled');
+                  }
+                });
+              }
+              //end for schedule
             }
           });
 
@@ -495,6 +523,7 @@ var service = {
     if(!service_duration){
       service_duration = 30;
     }
+    localStorage.service_duration = service_duration;
     $.ajax({
       url: 'http://medserv.duk-tech.com/WS/Service.svc/GetDailyScheduleForClientBooking_V2',
       type: 'GET',

@@ -96,7 +96,14 @@
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<table class="schedule-tab">
+					<thead>
+						<tr>
+							<th class="text-center">Provider Schedule</th>
+							<th class="text-center">My Schedule</th>
+						</tr>
+					</thead>
 				</table>
+				<div class="clearfix"></div>
 				<div class="row">
 					<div class="col-xs-12 nav-btn">
 						<button class="round-btn pull-left" onclick="window.open('calendar.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
@@ -145,6 +152,7 @@
 			$('.step3text').text(selectedDate);
 			$('.service_category_name').text(serviceCategoryName);
 			helper.showHours();
+			service.get_bookings_for_user();
 		});
 
 
