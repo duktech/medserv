@@ -68,10 +68,13 @@
 	</div>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-12">
-				Mein Arzte
+			<div class="col-xs-12 text-center">
+				<h1 class="content-title mt-top">Meine arzte</h1>
 			</div>
 		</div>
+		<table class="categories_with_provide">
+
+		</table>
 	</div>
 	<!-- /.container -->
 
@@ -87,6 +90,17 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
+
+	<script src="js/moment.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript">
+		var current_user = helper.get_current_user();
+		if(current_user){//logged in
+			service.getAllCategoriesWithProvider();
+		}else{
+			window.open('index.html', '_self', 'location=yes');
+		}
+	</script>
 </body>
 
 </html>

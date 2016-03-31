@@ -834,3 +834,40 @@ input.cmn-toggle-round-flat + label::before {
 .responsive-calendar .day.active a:hover, .responsive-calendar .day.active a.selected{
 	background-color: #1d86c8 !important;
 }
+table.categories_with_provide{
+	margin-top: 10px;
+}
+table.categories_with_provide tr{
+	border-bottom: 1px solid #000;
+}
+table.categories_with_provide tr:last-child{
+	border: 0;
+}
+table.categories_with_provide td img{
+	max-width: 100%;
+	vertical-align: middle;
+	margin: 15px;
+}
+table.categories_with_provide td{
+	width: 50%;
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+}
+table.categories_with_provide td .categ_title{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	color: #fff;
+	font-weight: bold;
+	background: #1d86c8;
+	padding: 2px 10px;
+}
+table.categories_with_provide td select{
+	min-width: 50%;
+	font-size: 24px;
+}
+table.categories_with_provide td select option{
+	font-size: 16px;
+}

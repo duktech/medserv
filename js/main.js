@@ -378,6 +378,43 @@ var service = {
       }
     });
   },
+  getAllCategoriesWithProvider: function(){
+    $.ajax({
+      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetAllCategories',
+      type: 'GET',
+      success: function (data) {
+        if (data.Status == 1) {
+          var html = '';
+          $.each(data.SearchCategory,function(index,elem){
+            console.log(elem);
+            var logo_link = '';
+            if(elem.Logo == ""){
+              logo_link = 'http://medserv.duk-tech.com/CmsData/no_image.jpg';
+            }else{
+              logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.Id+'/Logo/'+elem.Logo;
+            }
+            html += '<tr>';
+            html += '<td data-id="'+elem.Id+'"><img src="'+logo_link+'"><span class="categ_title">'+elem.DefaultName+'</span></td>';
+            html += '<td><select id="provider_select" name="provider_select" data-id="'+elem.Id+'">';
+            html += '<option value="1">pref provider</option>';
+            html += '</select></td>';
+            html += '</tr>';
+          });
+          $('.categories_with_provide').append(html);
+        }
+
+      },
+      error: function (err) {
+        console.log(err);
+        navigator.notification.alert(
+          'Error',  // message
+          function(){},         // callback
+          'Warning',            // title
+          'Ok'                  // buttonName
+        );
+      }
+    });
+  },
   GetProviderServiceCategories: function(){
     $.ajax({
       url: 'http://medserv.duk-tech.com/WS/Service.svc/GetProviderServiceCategories',
