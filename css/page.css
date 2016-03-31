@@ -525,7 +525,7 @@ input.cmn-toggle-round-flat + label::before {
 .schedule-tab {
 	float: left;
 	width: 100%;
-	margin-bottom: 20px;
+	margin-bottom: 70px;
 }
 .clearfix{
 	clear: both;
