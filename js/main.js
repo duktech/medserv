@@ -89,7 +89,7 @@ var helper = {
       window.open('schedule.html', '_self', 'location=yes');
     }else{
       navigator.notification.alert(
-        'Please select a date!',  // message
+        'Please select an active date!',  // message
         function(){},         // callback
         'Warning',            // title
         'Ok'                  // buttonName
