@@ -541,10 +541,12 @@ input.cmn-toggle-round-flat + label::before {
 .schedule-tab td.ava {
 	background-color: #1cfc51;
 	border-right: 1px solid #283437;
+	border-left: 1px solid #283437;
 }
 .schedule-tab td.nava {
 	background-color: #fc1c1c;
 	border-right: 1px solid #283437;
+	border-left: 1px solid #283437;
 }
 
 .success-title {
