@@ -124,7 +124,8 @@ var helper = {
       var start_date = eval("new " + elem.Time.slice(1, -1));
       var moment_date = moment(start_date);
 
-      html += '<td><div class="'+cclass+'"></div><a href="#" class="time-hr cnone '+disabled+'" data-time="'+elem.Time+'" data-duration="'+service_duration+'">'+elem.TimeToString+'</a></td>';
+      html += '<td><a href="#" class="time-hr cnone '+disabled+'" data-time="'+elem.Time+'" data-duration="'+service_duration+'">'+elem.TimeToString+'</a></td>';
+      html += '<td class="'+cclass+'"></td>';
       html += '<td class="my_schedule_hour" data-time="'+elem.Time+'" data-duration="'+service_duration+'"></td>';
       html += '</tr>';
     });
