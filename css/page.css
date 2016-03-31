@@ -9,8 +9,6 @@ body {
 
 a {
 	color: inherit;
-	border-bottom: 1px dotted #283437;
-	border-bottom-style: dotted;
 }
 
 a:hover {
