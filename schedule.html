@@ -99,8 +99,8 @@
 					<thead>
 						<tr>
 							<th class="text-center">UHR</th>
-							<th class="text-center">Provider Schedule</th>
-							<th class="text-center">mein Schedule</th>
+							<th class="text-center table2text"></th>
+							<th class="text-center">mein</th>
 						</tr>
 					</thead>
 				</table>
@@ -152,6 +152,7 @@
 			$('.step2text').text(current_service_name);
 			$('.step3text').text(selectedDate);
 			$('.service_category_name').text(serviceCategoryName);
+			$('.table2text').text(provider_category_name + " Schedule");
 			helper.showHours();
 			service.get_bookings_for_user();
 		});

@@ -535,6 +535,11 @@ input.cmn-toggle-round-flat + label::before {
 .schedule-tab td{
 	width: 33.3%;
 }
+.schedule-tab th{
+	vertical-align: middle;
+	line-height: 24px;
+	font-size: 20px;
+}
 .schedule-tab td.ava {
 	background-color: #1cfc51;
 	border-right: 1px solid #283437;
@@ -614,18 +619,21 @@ input.cmn-toggle-round-flat + label::before {
 	display: none;
 }
 
-.cnone {
+.cnone a{
 	color: #283437;
 }
-.cnone.active {
+.cnone.active{
+	background: #1d86c8;
+}
+.cnone.active a{
+	color: #fff;
+	text-decoration: none;
+}
+.cnonefocus a{
 	color: #e53935;
 	text-decoration: none;
 }
-.cnonefocus {
-	color: #e53935;
-	text-decoration: none;
-}
-.cnone.disabled{
+.cnone.disabled a{
 	color: #a1a1a1;
 }
 .mpname {
@@ -817,4 +825,10 @@ input.cmn-toggle-round-flat + label::before {
 }
 .schedule-tab tbody tr{
 	border: 1px solid #283437;
+}
+.responsive-calendar .day.active a{
+	background-color: green !important;
+}
+.responsive-calendar .day.active a:hover, .responsive-calendar .day.active a.selected{
+	background-color: #1d86c8 !important;
 }

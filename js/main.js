@@ -124,19 +124,19 @@ var helper = {
       var start_date = eval("new " + elem.Time.slice(1, -1));
       var moment_date = moment(start_date);
 
-      html += '<td><a href="#" class="time-hr cnone '+disabled+'" data-time="'+elem.Time+'" data-duration="'+service_duration+'">'+elem.TimeToString+'</a></td>';
+      html += '<td class="cnone '+disabled+'"><a href="#" class="time-hr" data-time="'+elem.Time+'" data-duration="'+service_duration+'">'+elem.TimeToString+'</a></td>';
       html += '<td class="'+cclass+'"></td>';
       html += '<td class="my_schedule_hour" data-time="'+elem.Time+'" data-duration="'+service_duration+'"></td>';
       html += '</tr>';
     });
     $('.schedule-tab').append(html);
-    $('.schedule-tab .cnone').click(function(){
+    $('.schedule-tab td.cnone').click(function(){
       if($(this).hasClass('disabled')){
         return 0;
       }
       $('.schedule-tab .cnone').removeClass('active');
       $(this).addClass('active');
-      localStorage.selectedHour = $(this).attr('data-time');
+      localStorage.selectedHour = $(this).find('a').attr('data-time');
     });
   }
 };
@@ -486,7 +486,10 @@ var service = {
           $(".responsive-calendar").responsiveCalendar({
             monthChangeAnimation: false,
             onDayClick: function (events) {
+              localStorage.removeItem('selectedDate');
+              $('.responsive-calendar .day a').removeClass('selected');
               if($(this).parent().hasClass('active')){
+                $(this).addClass('selected');
                 var postdate = $(this).attr("data-month") + "/" + $(this).attr("data-day") + "/" + $(this).attr("data-year");
                 service.GetDailyScheduleForClientBooking_V2(postdate, service_duration);
               }else{
@@ -496,6 +499,7 @@ var service = {
                   'Warning',            // title
                   'Ok'                  // buttonName
                 );
+
               }
             },
             onMonthChange: function(){
