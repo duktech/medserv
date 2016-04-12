@@ -207,6 +207,7 @@ var service = {
     });
   },
   user_login: function (email, pswd) {
+    alert('login',email,pswd);
     if(email == '' || pswd == ''){
       navigator.notification.alert(
         'Both fields are mandatory!',  // message
@@ -225,6 +226,7 @@ var service = {
       }),
       contentType: 'application/json',
       success: function (data) {
+        alert('ok');
         console.log(data);
         if (data.AuthenticationResult.AuthStatus == "1") { //if success
           localStorage.userToken = data.AuthenticationResult.Token;
@@ -239,6 +241,7 @@ var service = {
         }
       },
       error: function (err) {
+        alert('eroare');
         navigator.notification.alert(
           'Error',  // message
           function(){},         // callback
