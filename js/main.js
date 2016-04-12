@@ -138,6 +138,20 @@ var helper = {
       $(this).addClass('active');
       localStorage.selectedHour = $(this).find('a').attr('data-time');
     });
+  },
+  getUserPrefProvider: function(){
+    var html = '';
+    html += '<tr><td>test</td></tr>';
+
+    $('.prefered_container').append(html);
+  },
+  open_artze3page: function(categ_id){
+    localStorage.arzte_pref_category_id = categ_id;
+    window.open('mein-arzte-step3.html', '_self', 'location=yes');
+  },
+  savePrefProvider: function(category_id, provider_id){
+    console.log(category_id, provider_id);
+    window.open('mein-arzte.html', '_self', 'location=yes')
   }
 };
 var service = {
@@ -207,7 +221,6 @@ var service = {
     });
   },
   user_login: function (email, pswd) {
-    alert('login',email,pswd);
     if(email == '' || pswd == ''){
       navigator.notification.alert(
         'Both fields are mandatory!',  // message
@@ -226,7 +239,6 @@ var service = {
       }),
       contentType: 'application/json',
       success: function (data) {
-        alert('ok');
         console.log(data);
         if (data.AuthenticationResult.AuthStatus == "1") { //if success
           localStorage.userToken = data.AuthenticationResult.Token;
@@ -241,7 +253,6 @@ var service = {
         }
       },
       error: function (err) {
-        alert('eroare');
         navigator.notification.alert(
           'Error',  // message
           function(){},         // callback
@@ -381,7 +392,7 @@ var service = {
       }
     });
   },
-  getAllCategoriesWithProvider: function(){
+  getAllCategoriesArzte: function(){
     $.ajax({
       url: 'http://medserv.duk-tech.com/WS/Service.svc/GetAllCategories',
       type: 'GET',
@@ -397,13 +408,15 @@ var service = {
               logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.Id+'/Logo/'+elem.Logo;
             }
             html += '<tr>';
-            html += '<td data-id="'+elem.Id+'"><img src="'+logo_link+'"><span class="categ_title">'+elem.DefaultName+'</span></td>';
-            html += '<td><select id="provider_select" name="provider_select" data-id="'+elem.Id+'">';
-            html += '<option value="1">pref provider</option>';
-            html += '</select></td>';
+            html += '<td onclick="helper.open_artze3page('+elem.Id+');"">';
+            html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
+            html += '<div class="col-xs-8 categ_title"> <span>' + elem.DefaultName + '</span> </div>';
+            html += '</td>';
             html += '</tr>';
+
           });
-          $('.categories_with_provide').append(html);
+
+          $('.categories_container').append(html);
         }
 
       },
@@ -417,6 +430,15 @@ var service = {
         );
       }
     });
+  },
+  GetProviderForCategoryArzte: function(category_id){
+    $('.addProviderContainer .provider').html('');
+    var html = ''
+    html += '<tr>';
+    html += '<td onclick="helper.savePrefProvider('+category_id+', '+category_id+')">'+category_id+'</td>';
+    html += '</tr>';
+
+    $('.providers_container').append(html);
   },
   GetProviderServiceCategories: function(){
     $.ajax({

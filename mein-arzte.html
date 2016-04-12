@@ -72,9 +72,15 @@
 				<h1 class="content-title mt-top">Meine arzte</h1>
 			</div>
 		</div>
-		<table class="categories_with_provide">
+
+		<table class="prefered_container">
 
 		</table>
+		<div class="row">
+			<div class="col-xs-12 nav-btn text-center">
+				<button class="btn add" onclick="window.open('mein-arzte-step2.html', '_self', 'location=yes');">+</button>
+			</div>
+		</div>
 	</div>
 	<!-- /.container -->
 
@@ -96,7 +102,7 @@
 	<script type="text/javascript">
 		var current_user = helper.get_current_user();
 		if(current_user){//logged in
-			service.getAllCategoriesWithProvider();
+			helper.getUserPrefProvider();
 		}else{
 			window.open('index.html', '_self', 'location=yes');
 		}

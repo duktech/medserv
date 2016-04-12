@@ -63,29 +63,21 @@
 			<span class="icon-bar"></span>
 		</button>
 		<div class="pull-left icon-cont"><img src="img/logo.png" alt="Logo icon" class="logo-icon" /> </div>
-		<h1 class="window-title">NEUER TERMIN</h1>
-		<button class="home-btn pull-right" onclick="window.open('ntermin.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
+		<h1 class="window-title">MEINE Arzte</h1>
+		<button class="home-btn pull-right" onclick="window.open('index.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
 	</div>
 	<div class="container-fluid">
-
 		<div class="row">
 			<div class="col-xs-12 text-center">
-				<h1 class="content-title mt-top">Was für einen Termin wünschen sie?</h1>
+				<h1 class="content-title mt-top">Meine arzte</h1>
+				<h3>Select Prefered Provider</h3>
 			</div>
 		</div>
-		<div class="row button-wrapper categories_container">
-			<!--<div class="col-xs-6 ">-->
-				<!--<button class="btn-default btn-choice" onclick="window.open('ntermin3.html', '_self', 'location=yes');"><img src="img/mficon.png" />HAUSARZT</button>-->
-			<!--</div>-->
-			<!--<div class="col-xs-6">-->
-				<!--<button class="btn-default btn-choice" onclick="window.open('termine.html', '_self', 'location=yes');"><img src="img/deicon.png" />ZAHNARZT</button>-->
-			<!--</div>-->
-		</div>
-		<div class="row">
-			<div class="col-xs-12 nav-btn">
-				<button class="round-btn pull-left" onclick="window.open('ntermin.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
-			</div>
-		</div>
+
+		<table class="providers_container">
+
+		</table>
+
 	</div>
 	<!-- /.container -->
 
@@ -102,24 +94,17 @@
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
 
+	<script src="js/moment.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
 		var current_user = helper.get_current_user();
 		if(current_user){//logged in
-			localStorage.removeItem('provider_category_id');
-			localStorage.removeItem('provider_category_name');
-			localStorage.removeItem('current_service_id');
-			localStorage.removeItem('current_service_name');
-			localStorage.removeItem('serviceCategoryName');
-			localStorage.removeItem('current_service_description');
-			localStorage.removeItem('selectedDate');
-			localStorage.removeItem('dailySchedule');
-			localStorage.removeItem('selectedHour');
-			localStorage.removeItem('serviceResources');
-			service.getAllCategories();
+			var pref_category_id = localStorage.arzte_pref_category_id;
+			service.GetProviderForCategoryArzte(pref_category_id);
 		}else{
 			window.open('index.html', '_self', 'location=yes');
 		}
+		//helper.savePrefProvider();
 	</script>
 </body>
 
