@@ -834,22 +834,77 @@ input.cmn-toggle-round-flat + label::before {
 .responsive-calendar .day.active a:hover, .responsive-calendar .day.active a.selected{
 	background-color: #1d86c8 !important;
 }
-.addProviderContainer{
-	display: none;
-}
+
 .categories_container{
 	margin-top: 30px;
+	width: 100%;
 }
 .categories_container td{
 	border-bottom: 1px solid #000;
 	padding: 10px 0;
 	position: relative;
 }
+.categories_container tr:last-child td{
+	border: 0;
+}
 .categories_container td .categ_title{
 	position: absolute;
 	top: 50%;
 	left: 33.33333%;
 	transform: translateY(-50%);
+	font-weight: bold;
+}
+
+.providers_container{
+	margin-top: 30px;
+	width: 100%;
+}
+.providers_container td{
+	border-bottom: 1px solid #000;
+	padding: 10px 0;
+	position: relative;
+}
+.providers_container tr:last-child td{
+	border: 0;
+}
+.providers_container td .categ_title{
+	position: absolute;
+	top: 50%;
+	left: 33.33333%;
+	transform: translateY(-50%);
+	font-weight: bold;
+}
+.providers_container td .categ_title .description{
+	font-weight: normal;
+}
+.providers_container td img{
+	margin: 0 auto;
+}
+
+.prefered_container{
+	margin-top: 30px;
+	width: 100%;
+}
+.prefered_container td{
+	border-bottom: 1px solid #000;
+	padding: 10px 0;
+	position: relative;
+}
+.prefered_container tr:last-child td{
+	border: 0;
+}
+.prefered_container td .categ_title{
+	position: absolute;
+	top: 50%;
+	left: 33.33333%;
+	transform: translateY(-50%);
+	font-weight: bold;
+}
+.prefered_container td .categ_title .description{
+	font-weight: normal;
+}
+.prefered_container td img{
+	margin: 0 auto;
 }
 .nav-btn .btn.add{
 	padding: 0;
@@ -857,4 +912,7 @@ input.cmn-toggle-round-flat + label::before {
 	background: transparent;
 	color: #fff;
 	width: 100%;
+}
+h3.second-title{
+	margin: 30px auto;
 }

@@ -140,10 +140,33 @@ var helper = {
     });
   },
   getUserPrefProvider: function(){
-    var html = '';
-    html += '<tr><td>test</td></tr>';
 
+
+    var html = '';
+    var prefArtze = localStorage.prefArtze;
+    if(prefArtze) {
+      prefArtze = JSON.parse(prefArtze);
+      $.each(prefArtze, function(index, elem){
+
+        var logo_link = '';
+        if(elem.Logo == ""){
+          logo_link = 'http://medserv.duk-tech.com/CmsData/no_image.jpg';
+        }else{
+          logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.category.Id+'/Logo/'+elem.category.Logo;
+        }
+        html += '<tr>';
+        html += '<td onclick="helper.open_artze3page('+elem.category.Id+');"">';
+        html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
+        html += '<div class="col-xs-8 categ_title"> <span>' + elem.category.DefaultName + '</span> <p>pref: '+elem.provider.Name+'</p></div>';
+        html += '</td>';
+        html += '</tr>';
+
+      });
+    }else{
+      html += '<tr><td>No pref provider</td></tr>';
+    }
     $('.prefered_container').append(html);
+
   },
   open_artze3page: function(categ_id){
     localStorage.arzte_pref_category_id = categ_id;
@@ -151,6 +174,44 @@ var helper = {
   },
   savePrefProvider: function(category_id, provider_id){
     console.log(category_id, provider_id);
+    var allCategoriesForArtze = JSON.parse( localStorage.allCategoriesForArtze );
+    var providerForCurrentCategoryArtze = JSON.parse( localStorage.providerForCurrentCategoryArtze );
+    var current_category = null;
+    var current_provider = null;
+
+    $.each(allCategoriesForArtze, function(index, elem){
+      if(elem.Id == category_id){
+        current_category = elem;
+      }
+    });
+    $.each(providerForCurrentCategoryArtze, function(index, elem){
+      if(elem.Id == provider_id){
+        current_provider = elem;
+      }
+    });
+
+
+    if(current_category && current_provider){
+      var prefArtze = localStorage.prefArtze;
+      var pref_obj = {category: current_category, provider: current_provider};
+      if(prefArtze){
+        prefArtze = JSON.parse(prefArtze);
+        console.log(prefArtze);
+        prefArtze = $.grep(prefArtze, function (el, i) {
+          if(el.category.Id == current_category.Id){
+            return false;
+          }
+          return true; // keep the element in the array
+        });
+        prefArtze.push(pref_obj);
+        localStorage.prefArtze = JSON.stringify(prefArtze);
+      }else{
+        prefArtze = [];
+        prefArtze.push(pref_obj);
+        localStorage.prefArtze = JSON.stringify(prefArtze);
+      }
+    }
+
     window.open('mein-arzte.html', '_self', 'location=yes')
   }
 };
@@ -398,9 +459,9 @@ var service = {
       type: 'GET',
       success: function (data) {
         if (data.Status == 1) {
+          localStorage.allCategoriesForArtze = JSON.stringify(data.SearchCategory);
           var html = '';
           $.each(data.SearchCategory,function(index,elem){
-            console.log(elem);
             var logo_link = '';
             if(elem.Logo == ""){
               logo_link = 'http://medserv.duk-tech.com/CmsData/no_image.jpg';
@@ -408,7 +469,7 @@ var service = {
               logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.Id+'/Logo/'+elem.Logo;
             }
             html += '<tr>';
-            html += '<td onclick="helper.open_artze3page('+elem.Id+');"">';
+            html += '<td onclick="helper.open_artze3page('+elem.Id+');">';
             html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
             html += '<div class="col-xs-8 categ_title"> <span>' + elem.DefaultName + '</span> </div>';
             html += '</td>';
@@ -432,13 +493,44 @@ var service = {
     });
   },
   GetProviderForCategoryArzte: function(category_id){
-    $('.addProviderContainer .provider').html('');
-    var html = ''
-    html += '<tr>';
-    html += '<td onclick="helper.savePrefProvider('+category_id+', '+category_id+')">'+category_id+'</td>';
-    html += '</tr>';
 
-    $('.providers_container').append(html);
+    $('.addProviderContainer .provider').html('');
+    $.ajax({
+      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetProvidersForDomain',
+      type: 'GET',
+      data: {DomainId: category_id},
+      success: function (data) {
+        if (data.Status == 1) {
+          localStorage.providerForCurrentCategoryArtze = JSON.stringify(data.ProviderList);
+          var html = '';
+          $.each(data.ProviderList,function(index,elem){
+            var logo_link = '';
+            if(elem.Logo_mobile == "" || !elem.Logo_mobile){
+              logo_link = 'http://medserv.duk-tech.com/CmsData/no_image.jpg';
+            }else{
+              logo_link = 'http://medserv.duk-tech.com/CmsData/Provider/'+elem.Id+'/Logo/'+elem.Logo_mobile;
+            }
+            html += '<tr>';
+            html += '<td onclick="helper.savePrefProvider('+category_id+', '+elem.Id+')">';
+            html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
+            html += '<div class="col-xs-8 categ_title"> <span>' + elem.Name + '</span> <p class="description">'+elem.Address+'</p></div>';
+            html += '</td>';
+            html += '</tr>';
+          });
+          $('.providers_container').append(html);
+        }
+
+      },
+      error: function (err) {
+        console.log(err);
+        navigator.notification.alert(
+          'Error',  // message
+          function(){},         // callback
+          'Warning',            // title
+          'Ok'                  // buttonName
+        );
+      }
+    });
   },
   GetProviderServiceCategories: function(){
     $.ajax({

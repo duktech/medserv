@@ -70,7 +70,7 @@
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<h1 class="content-title mt-top">Meine arzte</h1>
-				<h3>Select Prefered Provider</h3>
+				<h3 class="second-title">Select Prefered Provider</h3>
 			</div>
 		</div>
 
@@ -100,11 +100,15 @@
 		var current_user = helper.get_current_user();
 		if(current_user){//logged in
 			var pref_category_id = localStorage.arzte_pref_category_id;
-			service.GetProviderForCategoryArzte(pref_category_id);
+			if(pref_category_id){
+				service.GetProviderForCategoryArzte(pref_category_id);
+			}else{
+				window.open('mein-arzte.html', '_self', 'location=yes');
+			}
+
 		}else{
 			window.open('index.html', '_self', 'location=yes');
 		}
-		//helper.savePrefProvider();
 	</script>
 </body>
 
