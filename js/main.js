@@ -45,9 +45,9 @@ var helper = {
     localStorage.removeItem('userToken');
     window.open('index.html', '_self', 'location=yes');
   },
-  open_ntermin3page: function(categ_id){
+  open_ntermin3page: function(categ_id, category_name){
     localStorage.provider_category_id = categ_id;
-    localStorage.provider_category_name = $('.provider_categ_btn[data-id="'+categ_id+'"]').text();
+    localStorage.provider_category_name = category_name;
     window.open('ntermin3.html', '_self', 'location=yes');
   },
   service_select: function(service_id, service_name,navigate){
@@ -141,7 +141,6 @@ var helper = {
   },
   getUserPrefProvider: function(){
 
-
     var html = '';
     var prefArtze = localStorage.prefArtze;
     if(prefArtze) {
@@ -155,17 +154,21 @@ var helper = {
           logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.category.Id+'/Logo/'+elem.category.Logo;
         }
         html += '<tr>';
-        html += '<td onclick="helper.open_artze3page('+elem.category.Id+');"">';
+        html += '<td onclick="helper.open_ntermin3page('+elem.category.Id+',\''+ elem.category.DefaultName +'\' );">';
         html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
-        html += '<div class="col-xs-8 categ_title"> <span>' + elem.category.DefaultName + '</span> <p>pref: '+elem.provider.Name+'</p></div>';
+        html += '<div class="col-xs-6 categ_title"> <span>' + elem.category.DefaultName + '</span> <p>pref: '+elem.provider.Name+'</p></div>';
+        html += '<div class="col-xs-2 pull-right"><button type="button" class="btn-tethr changePrefProvider" onclick="helper.open_artze3page('+elem.category.Id+');">Change</button></div>';
         html += '</td>';
         html += '</tr>';
 
       });
     }else{
-      html += '<tr><td>No pref provider</td></tr>';
+      html = '<tr><td><h2 class="text-center">No prefered providers selected</h2></td></tr>';
     }
     $('.prefered_container').append(html);
+    $('button.changePrefProvider').click(function(e){
+      e.stopPropagation();
+    });
 
   },
   open_artze3page: function(categ_id){
@@ -436,7 +439,7 @@ var service = {
               logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.Id+'/Logo/'+elem.Logo;
             }
 
-            html += '<div class="col-xs-6 "><button class="btn-default btn-choice provider_categ_btn" data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+');"><img src="'+logo_link+'">'+elem.DefaultName+'</button></div>';
+            html += '<div class="col-xs-6 "><button class="btn-default btn-choice provider_categ_btn" data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+',\''+elem.DefaultName+'\');"><img src="'+logo_link+'">'+elem.DefaultName+'</button></div>';
           });
           $('.categories_container').append(html);
         }
@@ -517,6 +520,9 @@ var service = {
             html += '</td>';
             html += '</tr>';
           });
+          if( data.ProviderList.length == 0 ){
+            html = '<tr><td><h2 class="text-center">No providers for this category.</h2></td></tr>'
+          }
           $('.providers_container').append(html);
         }
 
@@ -533,10 +539,26 @@ var service = {
     });
   },
   GetProviderServiceCategories: function(){
+    var provider_category_id = localStorage.provider_category_id;
+    var prefArtze = localStorage.prefArtze;
+    if(prefArtze){
+      prefArtze = JSON.parse(prefArtze);
+      var providerName = false;
+      $.each(prefArtze,function(index,elem){
+        if (elem.category.Id == provider_category_id){
+          providerName = elem.provider.Name;
+        }
+      });
+      if(!providerName){
+        window.open('mein-arzte.html', '_self', 'location=yes');
+      }
+    }else{
+      window.open('mein-arzte.html', '_self', 'location=yes');
+    }
     $.ajax({
       url: 'http://medserv.duk-tech.com/WS/Service.svc/GetProviderServiceCategories',
       type: 'GET',
-      data: {name: 'Dr-Silvana-Scherb'},
+      data: {name: providerName},
       success: function (data) {
         console.log('GetProviderServiceCategories',data);
         if (data.Status == 1) {

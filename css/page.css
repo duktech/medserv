@@ -916,3 +916,12 @@ input.cmn-toggle-round-flat + label::before {
 h3.second-title{
 	margin: 30px auto;
 }
+.btn-tethr{
+	width: 100%;
+	border: 0;
+	background: #283437;
+	color: #fff;
+	height: 60px;
+	line-height: 60px;
+	font-weight: bold;
+}
