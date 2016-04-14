@@ -75,8 +75,9 @@ var helper = {
             'Ok'                  // buttonName
           );
         }
+      }else {
+        window.open('calendar.html', '_self', 'location=yes');
       }
-      window.open('calendar.html', '_self', 'location=yes');
     }else{
       navigator.notification.alert(
         'Please select a service!',  // message
