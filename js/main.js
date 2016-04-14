@@ -158,9 +158,9 @@ var helper = {
         }
         html += '<tr>';
         html += '<td onclick="helper.open_ntermin3page('+elem.category.Id+',\''+ elem.category.DefaultName +'\' );">';
-        html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
+        html += '<div class="col-xs-3"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
         html += '<div class="col-xs-6 categ_title"> <span>' + elem.category.DefaultName + '</span> <p>pref: '+elem.provider.Name+'</p></div>';
-        html += '<div class="col-xs-2 pull-right"><button type="button" class="btn-tethr changePrefProvider" onclick="helper.open_artze3page('+elem.category.Id+');">Change</button></div>';
+        html += '<div class="col-xs-3 pull-right"><button type="button" class="btn-tethr changePrefProvider" onclick="helper.open_artze3page('+elem.category.Id+');">Change</button></div>';
         html += '</td>';
         html += '</tr>';
 
@@ -488,8 +488,8 @@ var service = {
             }
             html += '<tr>';
             html += '<td onclick="helper.open_artze3page('+elem.Id+');">';
-            html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
-            html += '<div class="col-xs-8 categ_title"> <span>' + elem.DefaultName + '</span> </div>';
+            html += '<div class="col-xs-3"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
+            html += '<div class="col-xs-9 categ_title"> <span>' + elem.DefaultName + '</span> </div>';
             html += '</td>';
             html += '</tr>';
 
@@ -530,8 +530,8 @@ var service = {
             }
             html += '<tr>';
             html += '<td onclick="helper.savePrefProvider('+category_id+', '+elem.Id+')">';
-            html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
-            html += '<div class="col-xs-8 categ_title"> <span>' + elem.Name + '</span> <p class="description">'+elem.Address+'</p></div>';
+            html += '<div class="col-xs-3"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
+            html += '<div class="col-xs-9 categ_title"> <span>' + elem.Name + '</span> <p class="description">'+elem.Address+'</p></div>';
             html += '</td>';
             html += '</tr>';
           });

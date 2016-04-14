@@ -900,7 +900,7 @@ input.cmn-toggle-round-flat + label::before {
 .prefered_container td .categ_title{
 	position: absolute;
 	top: 50%;
-	left: 33.33333%;
+	left: 25%;
 	transform: translateY(-50%);
 	font-weight: bold;
 }
