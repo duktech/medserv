@@ -59,21 +59,23 @@ var helper = {
       this.go_to_calendar();
     }
   },
-  add_service_description: function(desc){
-    if(desc != '') {
-      localStorage.current_service_description = desc;
-      this.go_to_calendar();
-    }else{
-      navigator.notification.alert(
-        'Please add service description!',  // message
-        function(){},         // callback
-        'Warning',            // title
-        'Ok'                  // buttonName
-      );
-    }
-  },
   go_to_calendar: function(){
+
     if(localStorage.current_service_id){
+      if($('#other_service_id').length>0){
+        var desc = $('#other_service_id').val();
+        if(desc != '') {
+          localStorage.current_service_description = desc;
+          window.open('calendar.html', '_self', 'location=yes');
+        }else{
+          navigator.notification.alert(
+            'Please add service description!',  // message
+            function(){},         // callback
+            'Warning',            // title
+            'Ok'                  // buttonName
+          );
+        }
+      }
       window.open('calendar.html', '_self', 'location=yes');
     }else{
       navigator.notification.alert(
@@ -174,6 +176,11 @@ var helper = {
   open_artze3page: function(categ_id){
     localStorage.arzte_pref_category_id = categ_id;
     window.open('mein-arzte-step3.html', '_self', 'location=yes');
+  },
+  open_ntermin3step2: function(serviceCategoryId, serviceCategoryName){
+    localStorage.serviceCategoryId = serviceCategoryId;
+    localStorage.serviceCategoryName = serviceCategoryName;
+    window.open('ntermin3-step2.html', '_self', 'location=yes');
   },
   savePrefProvider: function(category_id, provider_id){
     console.log(category_id, provider_id);
@@ -571,7 +578,7 @@ var service = {
         if (data.Status == 1) {
           var html = '';
           $.each(data.ServiceCategoryList,function(index,elem){
-            html += '<button class="btn-ghost btn-l" onclick="service.GetServicesByCategory('+elem.Id+',\'' + elem.Name + '\');">'+elem.Name+'</button>';
+            html += '<button class="btn-ghost btn-l" onclick="helper.open_ntermin3step2('+elem.Id+',\'' + elem.Name + '\')">'+elem.Name+'</button>';//service.GetServicesByCategory('+elem.Id+',\'' + elem.Name + '\');
           });
           $('.btn-list.service_categories').append(html);
         }
@@ -588,8 +595,7 @@ var service = {
       }
     });
   },
-  GetServicesByCategory: function(Id, name){
-    localStorage.serviceCategoryName = name;
+  GetServicesByCategory: function(Id){
     $.ajax({
       url: 'http://medserv.duk-tech.com/WS/Service.svc/GetServicesByCategory',
       type: 'GET',
@@ -597,19 +603,21 @@ var service = {
       success: function (data) {
         console.log('GetServicesByCategory',data);
         if (data.Status == 1) {
+          var html = '';
           if(data.ServiceList.length > 1){//has services
-            var html = '';
+            html = '';
             $.each(data.ServiceList, function(index, elem){
-              html += '<li><button class="btn-nstyle" onclick="helper.service_select('+elem.Id+',\'' + elem.Name + '\', true);">'+elem.Name+'</button></li>';
+              html += '<button class="btn-ghost btn-l" onclick="helper.service_select('+elem.Id+',\'' + elem.Name + '\', true);">'+elem.Name+'</button>';
             });
             //modal-list
-            $('#has_service_modal .modal-list').html('');
-            $('#has_service_modal .modal-list').append(html);
-            $('#has_service_modal').modal().show();
+            $('.service_categories').append(html);
+
           }else{//no service
             helper.service_select(data.ServiceList[0].Id,data.ServiceList[0].Name);
-            $('#no_service_modal .modal-header .modal-title').text(data.ServiceList[0].Name);
-            $('#no_service_modal').modal().show();
+            html = '';
+            html += '<h1 class="text-center">'+data.ServiceList[0].Name+'</h1>';
+            html += '<textarea rows="10" id="other_service_id" placeholder="Add service description"></textarea>';
+            $('.service_categories').html(html);
           }
         }
       },

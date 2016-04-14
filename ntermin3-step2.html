@@ -84,7 +84,7 @@
 
 						<div class="col-xs-3 bs-wizard-step complete">
 							<!-- complete -->
-							<div class="text-center bs-wizard-stepnum">-</div>
+							<div class="text-center bs-wizard-stepnum service_category_name">-</div>
 							<div class="progress">
 								<div class="progress-bar"></div>
 							</div>
@@ -135,7 +135,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 nav-btn">
-				<button class="round-btn pull-left" onclick="window.open('ntermin2.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+				<button class="round-btn pull-left" onclick="window.open('ntermin3.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
 				<button class="round-btn pull-right" onclick="helper.go_to_calendar();"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 			</div>
 		</div>
@@ -161,10 +161,12 @@
 	<script type="text/javascript">
 		var provider_category_id = localStorage.provider_category_id;
 		var provider_category_name = localStorage.provider_category_name;
+		var serviceCategoryId = localStorage.serviceCategoryId;
+		var serviceCategoryName = localStorage.serviceCategoryName;
 
 		localStorage.removeItem('current_service_id');
 		localStorage.removeItem('current_service_name');
-		localStorage.removeItem('serviceCategoryName');
+
 		localStorage.removeItem('current_service_description');
 		localStorage.removeItem('selectedDate');
 		localStorage.removeItem('dailySchedule');
@@ -172,8 +174,9 @@
 		localStorage.removeItem('serviceResources');
 
 		$('.step1text').text(provider_category_name);
+		$('.service_category_name').text(serviceCategoryName);
 		if (provider_category_id != null) {
-			service.GetProviderServiceCategories();
+			service.GetServicesByCategory(serviceCategoryId);
 		}
 	</script>
 </body>
