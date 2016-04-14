@@ -148,10 +148,10 @@ var helper = {
       $.each(prefArtze, function(index, elem){
 
         var logo_link = '';
-        if(elem.Logo == ""){
+        if(elem.provider.Logo == "" || !elem.provider.Logo_mobile){
           logo_link = 'http://medserv.duk-tech.com/CmsData/no_image.jpg';
         }else{
-          logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.category.Id+'/Logo/'+elem.category.Logo;
+          logo_link = 'http://medserv.duk-tech.com/CmsData/Provider/'+elem.provider.Id+'/Logo/'+elem.provider.Logo_mobile;
         }
         html += '<tr>';
         html += '<td onclick="helper.open_ntermin3page('+elem.category.Id+',\''+ elem.category.DefaultName +'\' );">';
@@ -439,7 +439,14 @@ var service = {
               logo_link = 'http://medserv.duk-tech.com/CmsData/Domains/'+elem.Id+'/Logo/'+elem.Logo;
             }
 
-            html += '<div class="col-xs-6 "><button class="btn-default btn-choice provider_categ_btn" data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+',\''+elem.DefaultName+'\');"><img src="'+logo_link+'">'+elem.DefaultName+'</button></div>';
+            //html += '<div class="col-xs-6 "><button class="btn-default btn-choice provider_categ_btn" data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+',\''+elem.DefaultName+'\');"><img src="'+logo_link+'">'+elem.DefaultName+'</button></div>';
+
+            html += '<tr>';
+            html += '<td data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+',\''+elem.DefaultName+'\');">';
+            html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
+            html += '<div class="col-xs-8 categ_title"> <span>' + elem.DefaultName + '</span> </div>';
+            html += '</td>';
+            html += '</tr>';
           });
           $('.categories_container').append(html);
         }

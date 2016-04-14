@@ -99,7 +99,7 @@ a:hover {
 .btn-ghost {
 	background-color: #fc1c1c;
 	border: 0;
-	border-radius: 50px;
+	border-radius: 0;
 	color: white;
 	display: block;
 	height: 75px;
@@ -107,7 +107,7 @@ a:hover {
 	margin-right: auto;
 	margin-top: 10%;
 	text-transform: uppercase;
-	width: 50%;
+	width: 100%;
 }
 
 .icon-cont {
@@ -267,7 +267,7 @@ input.cmn-toggle-round-flat + label::before {
 .ntermin {
 	color: #283437;
 	background: rgba(255, 255, 255, 0.4);
-	margin-top: 18%;
+	margin-top: 20%;
 }
 
 .ntermin h1 {
@@ -506,11 +506,14 @@ input.cmn-toggle-round-flat + label::before {
 .round-btn {
 	background-color: #fc1c1c;
 	border: none;
-	border-radius: 50%;
-	height: 50px;
-	width: 50px;
+	height: 100%;
+	width: 100px;
 }
-
+.round-btn.middle{
+	width: calc(100% - 200px);
+	margin: 0 auto;
+	color: #fff;
+}
 .round-btn .glyphicon {
 	color: white;
 }
@@ -519,8 +522,8 @@ input.cmn-toggle-round-flat + label::before {
 	position: fixed;
 	Width: 100%;
 	bottom: 0;
-	padding-bottom: 10px;
-	padding-top: 10px;
+	padding: 0;
+	height: 60px;
 	background-color: #283437;
 }
 
@@ -798,7 +801,7 @@ input.cmn-toggle-round-flat + label::before {
 
 .fixed_bottom{
 	position: fixed;
-	bottom: 50px;
+	bottom: 0;
 	left: 50%;
 	transform: translatex(-50%);
 }
