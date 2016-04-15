@@ -14,6 +14,7 @@
 		</author>
 		
 		<gap:plugin name="org.apache.cordova.dialogs" />
+		<gap:plugin name="org.apache.cordova.geolocation" />
 		
 		<preference name="phonegap-version" value="cli-5.2.0" />
 		<preference name="orientation" value="default" />

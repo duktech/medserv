@@ -120,26 +120,44 @@ var helper = {
       html += '<tr>';
       var cclass = 'nava';
       var disabled = 'disabled';
+      var isFreeText = 'nicht frei';
       if(elem.IsAvailable){
         cclass = 'ava';
         disabled = '';
+        isFreeText = 'frei';
       }
       var start_date = eval("new " + elem.Time.slice(1, -1));
       var moment_date = moment(start_date);
 
       html += '<td class="cnone '+disabled+'"><a href="#" class="time-hr" data-time="'+elem.Time+'" data-duration="'+service_duration+'">'+elem.TimeToString+'</a></td>';
-      html += '<td class="'+cclass+'"></td>';
-      html += '<td class="my_schedule_hour" data-time="'+elem.Time+'" data-duration="'+service_duration+'"></td>';
+      html += '<td class="'+cclass+'">';
+      html += isFreeText;
+      html +=  '</td>';
+      html += '<td class="my_schedule_hour '+disabled+'" data-time="'+elem.Time+'" data-duration="'+service_duration+'">';
+      if(elem.IsAvailable) {
+        html += 'Select'
+      }
+      html +=  '</td>';
       html += '</tr>';
     });
     $('.schedule-tab').append(html);
-    $('.schedule-tab td.cnone').click(function(){
+    //$('.schedule-tab td.cnone').click(function(){
+    //  if($(this).hasClass('disabled')){
+    //    return 0;
+    //  }
+    //  $('.schedule-tab .cnone').removeClass('active');
+    //  $(this).addClass('active');
+    //  localStorage.selectedHour = $(this).find('a').attr('data-time');
+    //});
+    $('.schedule-tab td.my_schedule_hour').click(function(){
       if($(this).hasClass('disabled')){
         return 0;
       }
       $('.schedule-tab .cnone').removeClass('active');
-      $(this).addClass('active');
-      localStorage.selectedHour = $(this).find('a').attr('data-time');
+      $('.schedule-tab tr').removeClass('selected');
+      $(this).parent().find('.cnone').addClass('active');
+      $(this).parent().addClass('selected');
+      localStorage.selectedHour = $(this).attr('data-time');
     });
   },
   getUserPrefProvider: function(){

@@ -933,3 +933,19 @@ h3.second-title{
 	width: 100%;
 	margin-top: 30px;
 }
+.schedule-tab.styleNew tbody tr{
+	border: 0;
+	border-bottom: 1px solid #283437;
+	font-weight: bold;
+}
+.schedule-tab.styleNew tbody tr:last-child{
+	border: 0;
+}
+.schedule-tab.styleNew td.nava, .schedule-tab.styleNew td.ava{
+	border: 0;
+	background: transparent;
+}
+.schedule-tab.styleNew tr.selected, .schedule-tab.styleNew tr.selected td{
+	background: #1d86c8;
+	color: #fff
+}
