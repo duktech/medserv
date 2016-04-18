@@ -102,6 +102,7 @@
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
 		var current_user = helper.get_current_user();
+		localStorage.removeItem('artze3redirect');
 		if(current_user){//logged in
 			localStorage.removeItem('arzte_pref_category_id');
 			service.getAllCategoriesArzte();

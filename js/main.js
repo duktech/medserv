@@ -192,7 +192,11 @@ var helper = {
     });
 
   },
-  open_artze3page: function(categ_id){
+  open_artze3page: function(categ_id, with_redirect){
+    console.log(with_redirect);
+    if(with_redirect){
+      localStorage.artze3redirect = true;
+    }
     localStorage.arzte_pref_category_id = categ_id;
     window.open('mein-arzte-step3.html', '_self', 'location=yes');
   },
@@ -201,7 +205,7 @@ var helper = {
     localStorage.serviceCategoryName = serviceCategoryName;
     window.open('ntermin3-step2.html', '_self', 'location=yes');
   },
-  savePrefProvider: function(category_id, provider_id){
+  savePrefProvider: function(category_id, provider_id, with_redirect){
     console.log(category_id, provider_id);
     var allCategoriesForArtze = JSON.parse( localStorage.allCategoriesForArtze );
     var providerForCurrentCategoryArtze = JSON.parse( localStorage.providerForCurrentCategoryArtze );
@@ -241,7 +245,14 @@ var helper = {
       }
     }
 
-    window.open('mein-arzte.html', '_self', 'location=yes')
+    if(with_redirect){
+      console.log(current_category, current_provider);
+
+      helper.open_ntermin3page(current_category.Id,current_category.DefaultName );
+    }else{
+      window.open('mein-arzte.html', '_self', 'location=yes');
+    }
+
   }
 };
 var service = {
@@ -546,8 +557,13 @@ var service = {
             }else{
               logo_link = 'http://medserv.duk-tech.com/CmsData/Provider/'+elem.Id+'/Logo/'+elem.Logo_mobile;
             }
+            var artze3redirect = localStorage.artze3redirect;
             html += '<tr>';
-            html += '<td onclick="helper.savePrefProvider('+category_id+', '+elem.Id+')">';
+            if(artze3redirect){
+              html += '<td onclick="helper.savePrefProvider('+category_id+', '+elem.Id+', true)">';
+            }else{
+              html += '<td onclick="helper.savePrefProvider('+category_id+', '+elem.Id+')">';
+            }
             html += '<div class="col-xs-3"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
             html += '<div class="col-xs-9 categ_title"> <span>' + elem.Name + '</span> <p class="description">'+elem.Address+'</p></div>';
             html += '</td>';
