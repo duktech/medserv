@@ -508,7 +508,12 @@ var service = {
         if (data.Status == 1) {
           localStorage.allCategoriesForArtze = JSON.stringify(data.SearchCategory);
           var html = '';
+          var pref_category_id = localStorage.arzte_pref_category_id;
+          var current_category = '';
           $.each(data.SearchCategory,function(index,elem){
+            if (elem.Id == pref_category_id) {
+              current_category = elem;
+            }
             var logo_link = '';
             if(elem.Logo == ""){
               logo_link = 'http://medserv.duk-tech.com/CmsData/no_image.jpg';
@@ -525,6 +530,7 @@ var service = {
           });
 
           $('.categories_container').append(html);
+          $('.for_artze_categ').text(' for ' + current_category.DefaultName);
         }
 
       },
@@ -613,11 +619,16 @@ var service = {
       success: function (data) {
         console.log('GetProviderServiceCategories',data);
         if (data.Status == 1) {
-          var html = '';
-          $.each(data.ServiceCategoryList,function(index,elem){
-            html += '<button class="btn-ghost btn-l" onclick="helper.open_ntermin3step2('+elem.Id+',\'' + elem.Name + '\')">'+elem.Name+'</button>';//service.GetServicesByCategory('+elem.Id+',\'' + elem.Name + '\');
-          });
-          $('.btn-list.service_categories').append(html);
+          if(data.ServiceCategoryList.length > 0) {
+            var html = '';
+            $.each(data.ServiceCategoryList, function (index, elem) {
+              html += '<button class="btn-ghost btn-l" onclick="helper.open_ntermin3step2(' + elem.Id + ',\'' + elem.Name + '\')">' + elem.Name + '</button>';//service.GetServicesByCategory('+elem.Id+',\'' + elem.Name + '\');
+            });
+            $('.btn-list.service_categories').append(html);
+          }else{
+            $('.btn-list.service_categories').append('<h3>There are no services for this provider.</h3>');
+            $('.go_to_artze').removeClass('hidden');
+          }
         }
 
       },

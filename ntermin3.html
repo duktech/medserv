@@ -136,6 +136,7 @@
 		<div class="row">
 			<div class="col-xs-12 nav-btn">
 				<button class="round-btn pull-left" onclick="window.open('ntermin2.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+				<button class="round-btn middle go_to_artze hidden">Change Provider</button>
 				<button class="round-btn pull-right" onclick="helper.go_to_calendar();"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 			</div>
 		</div>
@@ -175,6 +176,9 @@
 		if (provider_category_id != null) {
 			service.GetProviderServiceCategories();
 		}
+		$('.go_to_artze').click(function(){
+			helper.open_artze3page(provider_category_id, true);
+		});
 	</script>
 </body>
 

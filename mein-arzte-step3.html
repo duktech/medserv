@@ -108,15 +108,19 @@
 			var pref_category_id = localStorage.arzte_pref_category_id;
 			if(pref_category_id){
 				service.GetProviderForCategoryArzte(pref_category_id);
-				var allCategoriesForArtze = JSON.parse( localStorage.allCategoriesForArtze );
-				var current_category = '';
-				$.each(allCategoriesForArtze, function(index, elem){
-					if(elem.Id == pref_category_id){
-						current_category = elem;
-					}
-				});
-				console.log(current_category);
-				$('.for_artze_categ').text(' for ' + current_category.DefaultName);
+				if(localStorage.allCategoriesForArtze) {
+					var allCategoriesForArtze = JSON.parse(localStorage.allCategoriesForArtze);
+					var current_category = '';
+					$.each(allCategoriesForArtze, function (index, elem) {
+						if (elem.Id == pref_category_id) {
+							current_category = elem;
+						}
+					});
+					$('.for_artze_categ').text(' for ' + current_category.DefaultName);
+				}else{
+					service.getAllCategoriesArzte();
+				}
+
 			}else{
 				window.open('mein-arzte.html', '_self', 'location=yes');
 			}
