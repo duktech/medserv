@@ -130,6 +130,7 @@ a:hover {
 	height: 30px;
 	width: 30px;
 	vertical-align: middle;
+	margin-left: 10px;
 }
 
 .window-title {
@@ -968,4 +969,7 @@ h3.second-title{
 }
 .categories_container td>div{
 	padding: 5px;
+}
+.navbar-toggle{
+	margin-right: 0;
 }

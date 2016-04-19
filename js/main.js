@@ -663,8 +663,8 @@ var service = {
           }else{//no service
             helper.service_select(data.ServiceList[0].Id,data.ServiceList[0].Name);
             html = '';
-            html += '<h1 class="text-center">'+data.ServiceList[0].Name+'</h1>';
-            html += '<textarea rows="10" id="other_service_id" placeholder="Add service description"></textarea>';
+            html += '<h3 class="text-center">'+data.ServiceList[0].Name+'</h3>';
+            html += '<textarea rows="6" id="other_service_id" placeholder="Add service description"></textarea>';
             $('.service_categories').html(html);
           }
         }
