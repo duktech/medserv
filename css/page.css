@@ -109,7 +109,16 @@ a:hover {
 	text-transform: uppercase;
 	width: 100%;
 }
-
+.btn-ghost.newStyle{
+	background-color: transparent;
+	border-bottom: 1px solid rgb(80,80,80);
+	color: rgb(80,80,80);
+	font-weight: bold;
+	font-size: 14px;
+}
+.btn-ghost.newStyle:last-child{
+	border-bottom: 0;
+}
 .icon-cont {
 	height: 50px;
 	line-height: 50px;
@@ -134,10 +143,8 @@ a:hover {
 }
 
 .sign-up,
-.glyphicon,
 .glyphicon-home {
 	color: #fff;
-	line-height: 47px;
 }
 
 .form-control {

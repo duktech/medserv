@@ -622,7 +622,7 @@ var service = {
           if(data.ServiceCategoryList.length > 0) {
             var html = '';
             $.each(data.ServiceCategoryList, function (index, elem) {
-              html += '<button class="btn-ghost btn-l" onclick="helper.open_ntermin3step2(' + elem.Id + ',\'' + elem.Name + '\')">' + elem.Name + '</button>';//service.GetServicesByCategory('+elem.Id+',\'' + elem.Name + '\');
+              html += '<button class="btn-ghost btn-l newStyle" onclick="helper.open_ntermin3step2(' + elem.Id + ',\'' + elem.Name + '\')"><span class="pull-left">' + elem.Name + '</span> <icon class="glyphicon glyphicon-chevron-right pull-right"> </icon></button>';//service.GetServicesByCategory('+elem.Id+',\'' + elem.Name + '\');
             });
             $('.btn-list.service_categories').append(html);
           }else{
@@ -655,7 +655,7 @@ var service = {
           if(data.ServiceList.length > 1){//has services
             html = '';
             $.each(data.ServiceList, function(index, elem){
-              html += '<button class="btn-ghost btn-l" onclick="helper.service_select('+elem.Id+',\'' + elem.Name + '\', true);">'+elem.Name+'</button>';
+              html += '<button class="btn-ghost btn-l newStyle" onclick="helper.service_select('+elem.Id+',\'' + elem.Name + '\', true);"><span class="pull-left">' + elem.Name + '</span> <icon class="glyphicon glyphicon-chevron-right pull-right"> </icon></button>';
             });
             //modal-list
             $('.service_categories').append(html);
