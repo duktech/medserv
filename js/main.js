@@ -599,10 +599,12 @@ var service = {
         }
       });
       if(!providerName){
-        window.open('mein-arzte.html', '_self', 'location=yes');
+        helper.open_artze3page(provider_category_id);
+        //window.open('mein-arzte.html', '_self', 'location=yes');
       }
     }else{
-      window.open('mein-arzte.html', '_self', 'location=yes');
+      helper.open_artze3page(provider_category_id);
+      //window.open('mein-arzte.html', '_self', 'location=yes');
     }
     $.ajax({
       url: 'http://medserv.duk-tech.com/WS/Service.svc/GetProviderServiceCategories',
