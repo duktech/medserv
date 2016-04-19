@@ -933,6 +933,9 @@ h3.second-title{
 	line-height: 60px;
 	font-weight: bold;
 }
+.changePrefProvider{
+	font-size: 20px;
+}
 #other_service_id{
 	width: 100%;
 	margin-top: 30px;
