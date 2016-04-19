@@ -541,8 +541,8 @@ input.cmn-toggle-round-flat + label::before {
 }
 .schedule-tab th{
 	vertical-align: middle;
-	line-height: 24px;
-	font-size: 20px;
+	line-height: 18px;
+	font-size: 14px;
 }
 .schedule-tab td.ava {
 	background-color: #1cfc51;
@@ -774,10 +774,6 @@ input.cmn-toggle-round-flat + label::before {
 		Width: 100%;
 		bottom: 0;
 	}
-	.round-btn {
-		width: 40px;
-		height: 40px;
-	}
 	/* SCHEDULE */
 	.schedule-tab {
 		font-size: 12px;
@@ -840,7 +836,6 @@ input.cmn-toggle-round-flat + label::before {
 }
 
 .categories_container{
-	margin-top: 30px;
 	width: 100%;
 }
 .categories_container td{
@@ -854,7 +849,7 @@ input.cmn-toggle-round-flat + label::before {
 .categories_container td .categ_title{
 	position: absolute;
 	top: 50%;
-	left: 33.33333%;
+	left: 25%;
 	transform: translateY(-50%);
 	font-weight: bold;
 }
@@ -874,7 +869,7 @@ input.cmn-toggle-round-flat + label::before {
 .providers_container td .categ_title{
 	position: absolute;
 	top: 50%;
-	left: 33.33333%;
+	left: 25%;
 	transform: translateY(-50%);
 	font-weight: bold;
 }
@@ -952,4 +947,18 @@ h3.second-title{
 }
 .alert{
 	margin-bottom: 0;
+}
+.bs-wizard-info{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.prefered_container td>div{
+	padding: 5px;
+}
+.providers_container td>div{
+	padding: 5px;
+}
+.categories_container td>div{
+	padding: 5px;
 }

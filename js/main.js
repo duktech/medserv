@@ -177,8 +177,8 @@ var helper = {
         html += '<tr>';
         html += '<td onclick="helper.open_ntermin3page('+elem.category.Id+',\''+ elem.category.DefaultName +'\' );">';
         html += '<div class="col-xs-3"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
-        html += '<div class="col-xs-6 categ_title"> <span>' + elem.category.DefaultName + '</span> <p>pref: '+elem.provider.Name+'</p></div>';
-        html += '<div class="col-xs-3 pull-right"><button type="button" class="btn-tethr changePrefProvider" onclick="helper.open_artze3page('+elem.category.Id+');">Change</button></div>';
+        html += '<div class="col-xs-7 categ_title"> <span>' + elem.category.DefaultName + '</span> <p>pref: '+elem.provider.Name+'</p></div>';
+        html += '<div class="col-xs-2 pull-right"><button type="button" class="btn-tethr changePrefProvider" onclick="helper.open_artze3page('+elem.category.Id+');"><i class="glyphicon glyphicon-edit"></i></button></div>';
         html += '</td>';
         html += '</tr>';
 
@@ -480,8 +480,8 @@ var service = {
 
             html += '<tr>';
             html += '<td data-id="'+elem.Id+'" onclick="helper.open_ntermin3page('+elem.Id+',\''+elem.DefaultName+'\');">';
-            html += '<div class="col-xs-4"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
-            html += '<div class="col-xs-8 categ_title"> <span>' + elem.DefaultName + '</span> </div>';
+            html += '<div class="col-xs-3"> <img src="'+logo_link+'" class="categ_img img-responsive"/> </div>';
+            html += '<div class="col-xs-9 categ_title"> <span>' + elem.DefaultName + '</span> </div>';
             html += '</td>';
             html += '</tr>';
           });
