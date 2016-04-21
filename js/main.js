@@ -1,3 +1,7 @@
+$(document).ready(function(){
+  helper.updateUserToUi();
+});
+var serviceBaseUrl = 'http://192.168.0.94/boookmeWS/Service.svc/';//http://medserv.duk-tech.com/WS/Service.svc/
 var helper = {
   set_calendar_active_days: function(days){
     setTimeout(function(){
@@ -44,6 +48,28 @@ var helper = {
   logOut: function(){
     localStorage.removeItem('userToken');
     window.open('index.html', '_self', 'location=yes');
+  },
+  updateUserToUi: function(){
+    var userToken = localStorage.userToken;
+    var userInfo = localStorage.userInfo;
+    if(userInfo){
+      userInfo = JSON.parse(userInfo);
+      $('.avatar-name').text(userInfo.Firstname + " " + userInfo.Lastname);
+      $('.mpname').text(userInfo.Firstname + " " + userInfo.Lastname)
+      if(userInfo.PhoneNumber){
+        $('.userPhone').text(userInfo.PhoneNumber);
+      }
+      if(userInfo.Email){
+        $('.userEmail').text(userInfo.Email);
+      }
+      if(userInfo.Address){
+        $('.userAddress').text(userInfo.Address);
+      }
+
+    }else{
+      $('.navmenu-brand').hide();
+
+    }
   },
   open_ntermin3page: function(categ_id, category_name){
     localStorage.provider_category_id = categ_id;
@@ -253,6 +279,19 @@ var helper = {
       window.open('mein-arzte.html', '_self', 'location=yes');
     }
 
+  },
+  distanceBetweenCoords : function(lat1, lon1, lat2, lon2){
+    if(lat1 == null || lon1 == null || lat2 == null || lon2 == null){
+      return -1;
+    }
+    var p = 0.017453292519943295;    // Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((lat2 - lat1) * p)/2 +
+      c(lat1 * p) * c(lat2 * p) *
+      (1 - c((lon2 - lon1) * p))/2;
+
+    //return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+    return Math.round((12742 * Math.asin(Math.sqrt(a))) * 1000); // in meters
   }
 };
 var service = {
@@ -285,7 +324,7 @@ var service = {
       return 0;
     }
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/RegisterUser',
+      url: serviceBaseUrl + 'RegisterUser',
       type: 'POST',
       data: JSON.stringify({
         firstname: firstname,
@@ -332,7 +371,7 @@ var service = {
       return 0;
     }
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/Login',
+      url: serviceBaseUrl + 'Login',
       type: 'POST',
       data: JSON.stringify({
         username: email,
@@ -343,7 +382,7 @@ var service = {
         console.log(data);
         if (data.AuthenticationResult.AuthStatus == "1") { //if success
           localStorage.userToken = data.AuthenticationResult.Token;
-          window.open('ntermin.html', '_self', 'location=yes');
+          service.saveCustomerProfileToLS(true);
         } else {
           navigator.notification.alert(
             data.AuthenticationResult.Message,  // message
@@ -363,19 +402,47 @@ var service = {
       }
     });
   },
+  saveCustomerProfileToLS: function (withRedirect){
+    var token = localStorage.userToken;
+    $.ajax({
+      url: serviceBaseUrl + 'GetCustomerProfile',
+      type: 'GET',
+      data: {Token: token},
+      success: function (data) {
+        if (data.Status == "1") {
+          localStorage.userInfo = JSON.stringify(data.Customer);
+        }
+        if(withRedirect){
+          window.open('ntermin.html', '_self', 'location=yes');
+        }
+      },
+      error: function (err) {
+        console.log(err);
+        navigator.notification.alert(
+          'Error',  // message
+          function(){},         // callback
+          'Warning',            // title
+          'Ok'                  // buttonName
+        );
+      }
+    });
+  },
   get_bookings_for_user: function (token) {
     if (!token) {
       token = localStorage.userToken;
     }
+
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetFullCallendarBookingsCustomer',
+      url: serviceBaseUrl + 'GetBookingsCustomerBetweenDates',//GetFullCallendarBookingsCustomer
       type: 'GET',
-      data: {Token: token},
+      data: {Token: token,
+        startDate: moment(new Date()).format('l'),
+        endDate: ''},
       success: function (data) {
-        console.log(data.BookingsList);
+        console.log(data);
         if (data.Status == 1) {
 
-          data.BookingsList.sort(function(a,b){
+          data.DayBookings.sort(function(a,b){
             var start_date_a = eval("new " + a.StartDate.slice(1, -1));
             var moment_date_a = moment(start_date_a);
 
@@ -393,8 +460,7 @@ var service = {
 
           var is_first_add_to_page = true;
           var html_history = '';
-          var html_schedule = '';
-          $.each(data.BookingsList, function(index, elem){
+          $.each(data.DayBookings, function(index, elem){
             var start_date = eval("new " + elem.StartDate.slice(1, -1));
             var moment_date = moment(start_date);
             var current_date = moment(new Date());
@@ -405,9 +471,17 @@ var service = {
                 $(".ntermin .behandlung").text(elem.ServiceName);//medic
                 is_first_add_to_page = false;
               }
-              html_history += '<div class="alert alert-warning" role="alert">';
-              //html_history += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-              html_history += '<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon" />';
+
+              var diffFromCurrentDate = moment.duration(moment_date.diff(current_date));
+              var diffFromCurrentDateMinutes = diffFromCurrentDate.asMinutes();
+
+              html_history += '<div class="alert alert-warning" role="alert" data-bookingId="'+elem.BookingId+'">';
+
+              html_history += '<div class="col-xs-3">';
+              html_history += '<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon img-responsive" />';
+              html_history += '</div>';
+
+              html_history += '<div class="col-xs-7">';
               html_history += '<table class="notification-text">';
               html_history += '<tr>';
               html_history += '<td class="op">Datum:</td>';
@@ -423,24 +497,33 @@ var service = {
               html_history += '</tr>';
               html_history += '</table>';
               html_history += '</div>';
+              if(diffFromCurrentDateMinutes < 30 && !elem.CheckedIn) {
 
-
-              //for schedule below here
-              var selected_date = moment(localStorage.selectedDate);
-              if(selected_date.format('DD/MM/YYYY') == moment_date.format('DD/MM/YYYY')){
-                var service_start_date = moment(eval("new " + elem.StartDate.slice(1, -1)));
-                var service_end_date = moment(eval("new " + elem.EndDate.slice(1, -1)));
-                console.log(service_start_date, service_end_date);
-                $.each($('.my_schedule_hour'), function(index, schedule){
-                  var schedule_start_date = moment(eval("new " + $(schedule).attr('data-time').slice(1, -1)));
-                  var schedule_duration = $(schedule).attr('data-duration');
-                  var schedule_end_date = schedule_start_date.clone().add(schedule_duration,'minutes');
-
-                  if(schedule_start_date.isBefore(service_end_date) && service_start_date.isBefore(schedule_end_date)){
-                    $(this).addClass('disabled');
-                  }
-                });
+                html_history += '<div class="col-xs-2">';
+                html_history += '<button type="button" class="btn-tethr checkin" onclick="service.checkIn('+elem.BookingId+',\''+elem.ProviderLatitude+'\',\''+elem.ProviderLongitude+'\')"><i class="glyphicon glyphicon-map-marker"></i></button>';
+                html_history += '</div>';
               }
+
+              html_history += '<div class="clearfix"></div>';
+              html_history += '</div>';
+
+
+              //for schedule below here, useless, deprecated
+              //var selected_date = moment(localStorage.selectedDate);
+              //if(selected_date.format('DD/MM/YYYY') == moment_date.format('DD/MM/YYYY')){
+              //  var service_start_date = moment(eval("new " + elem.StartDate.slice(1, -1)));
+              //  var service_end_date = moment(eval("new " + elem.EndDate.slice(1, -1)));
+              //  //console.log(service_start_date, service_end_date);
+              //  $.each($('.my_schedule_hour'), function(index, schedule){
+              //    var schedule_start_date = moment(eval("new " + $(schedule).attr('data-time').slice(1, -1)));
+              //    var schedule_duration = $(schedule).attr('data-duration');
+              //    var schedule_end_date = schedule_start_date.clone().add(schedule_duration,'minutes');
+              //
+              //    if(schedule_start_date.isBefore(service_end_date) && service_start_date.isBefore(schedule_end_date)){
+              //      $(this).addClass('disabled');
+              //    }
+              //  });
+              //}
               //end for schedule
             }
           });
@@ -462,7 +545,7 @@ var service = {
   },
   getAllCategories: function(){
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetAllCategories',
+      url: serviceBaseUrl + 'GetAllCategories',
       type: 'GET',
       success: function (data) {
         if (data.Status == 1) {
@@ -502,7 +585,7 @@ var service = {
   },
   getAllCategoriesArzte: function(){
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetAllCategories',
+      url: serviceBaseUrl + 'GetAllCategories',
       type: 'GET',
       success: function (data) {
         if (data.Status == 1) {
@@ -549,7 +632,7 @@ var service = {
 
     $('.addProviderContainer .provider').html('');
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetProvidersForDomain',
+      url: serviceBaseUrl + 'GetProvidersForDomain',
       type: 'GET',
       data: {DomainId: category_id},
       success: function (data) {
@@ -613,7 +696,7 @@ var service = {
       //window.open('mein-arzte.html', '_self', 'location=yes');
     }
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetProviderServiceCategories',
+      url: serviceBaseUrl + 'GetProviderServiceCategories',
       type: 'GET',
       data: {name: providerName},
       success: function (data) {
@@ -645,7 +728,7 @@ var service = {
   },
   GetServicesByCategory: function(Id){
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetServicesByCategory',
+      url: serviceBaseUrl + 'GetServicesByCategory',
       type: 'GET',
       data: {id: Id},
       success: function (data) {
@@ -683,7 +766,7 @@ var service = {
   GetNewScheduleBookingScreen: function () {
 
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetNewScheduleBookingScreen',
+      url: serviceBaseUrl + 'GetNewScheduleBookingScreen',
       type: 'POST',
       data: JSON.stringify({
         Token: localStorage.userToken,
@@ -769,7 +852,7 @@ var service = {
     }
     localStorage.service_duration = service_duration;
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/GetDailyScheduleForClientBooking_V2',
+      url: serviceBaseUrl + 'GetDailyScheduleForClientBooking_V2',
       type: 'GET',
       data: {
         Token: localStorage.userToken,
@@ -816,7 +899,7 @@ var service = {
     var moment_date = moment(date).format('DD-MM-YYYY HH:mm');
     console.log(moment_date);
     $.ajax({
-      url: 'http://medserv.duk-tech.com/WS/Service.svc/CustomerBookingRequestMobile',
+      url: serviceBaseUrl + 'CustomerBookingRequestMobile',
       type: 'POST',
       data: JSON.stringify({
         Token: userToken,
@@ -847,5 +930,66 @@ var service = {
         );
       }
     });
+  },
+  checkIn: function(bookingId, providerLat, providerLon){
+    // onSuccess Callback
+    // This method accepts a Position object, which contains the
+    // current GPS coordinates
+
+    var onSuccess = function(position) {
+      console.log('Latitude: '          + position.coords.latitude          + '\n' +
+        'Longitude: '         + position.coords.longitude         + '\n' +
+        'Altitude: '          + position.coords.altitude          + '\n' +
+        'Accuracy: '          + position.coords.accuracy          + '\n' +
+        'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+        'Heading: '           + position.coords.heading           + '\n' +
+        'Speed: '             + position.coords.speed             + '\n' +
+        'Timestamp: '         + position.timestamp                + '\n');
+
+      var distance = helper.distanceBetweenCoords(position.coords.latitude, position.coords.longitude, providerLat.replace(',','.'), providerLon.replace(',','.'));
+
+      if(distance < 50000){
+        //call service
+        var userToken = localStorage.userToken;
+        $.ajax({
+          url: serviceBaseUrl + 'ClientCheckIn',
+          type: 'POST',
+          data: JSON.stringify({
+            Token: userToken,
+            BookingId: bookingId
+          }),
+          contentType: 'application/json',
+          success: function (data) {
+            if(data.Status == "1"){
+              $('.alert.alert-warning[data-bookingId="'+bookingId+'"] button.checkin').hide();
+              navigator.notification.alert(
+                'You successfully checked in. ',  // message
+                function(){},         // callback
+                'Success',            // title
+                'Ok'                  // buttonName
+              );
+            }
+          },
+          error: function (err) {
+            navigator.notification.alert(
+              'Error',  // message
+              function(){},         // callback
+              'Warning',            // title
+              'Ok'                  // buttonName
+            );
+          }
+        });
+      }else{
+        alert('you are far');
+      }
+    };
+
+    // onError Callback receives a PositionError object
+    function onError(error) {
+      alert('code: '    + error.code    + '\n' +
+        'message: ' + error.message + '\n');
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }
 };

@@ -303,25 +303,17 @@ input.cmn-toggle-round-flat + label::before {
 	color: #fc1c1c;
 	font-weight: bold;
 	text-align: left;
-	padding-left: 20px;
+	padding-left: 10px;
 }
 
 .notification-wrapper {
 	margin-top: 5%;
 }
-
-.notification-icon {
-	float: left;
-	margin-right: 5%;
-	opacity: 0.3;
-	top: 45%;
+.notification-wrapper .alert>div{
+	padding: 5px;
 }
-
 .notification-text {
-	display: block;
 	font-size: 12px;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .bs-wizard {
@@ -345,6 +337,9 @@ input.cmn-toggle-round-flat + label::before {
 	color: #595959;
 	font-size: 16px;
 	margin-bottom: 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .bs-wizard > .bs-wizard-step .bs-wizard-info {
@@ -975,4 +970,12 @@ h3.second-title{
 }
 .navbar-toggle{
 	margin-right: 0;
+}
+.alert{
+	padding-right: 0;
+}
+.alert .btn-tethr{
+	background: #fc1c1c;
+	height: 40px;
+	line-height: 40px;
 }
