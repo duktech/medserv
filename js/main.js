@@ -295,8 +295,8 @@ var helper = {
   }
 };
 var service = {
-  user_register: function (firstname, lastname, email, pswd, cpswd) {
-    if(firstname == '' || lastname == '' || email == '' || pswd == '' || cpswd == ''){
+  user_register: function (firstname, lastname, email, pswd, cpswd, insurance) {
+    if(firstname == '' || lastname == '' || email == '' || pswd == '' || cpswd == '' || insurance == ''){
       navigator.notification.alert(
         'All fields are mandatory!',  // message
         function(){},         // callback
@@ -331,6 +331,7 @@ var service = {
         lastname: lastname,
         email: email,
         password: pswd,
+        insurance: insurance,
         bussinessName: '',
         locality: '',
         types: []
