@@ -54,8 +54,12 @@ var helper = {
     var userInfo = localStorage.userInfo;
     if(userInfo){
       userInfo = JSON.parse(userInfo);
+      console.log(userInfo);
       $('.avatar-name').text(userInfo.Firstname + " " + userInfo.Lastname);
-      $('.mpname').text(userInfo.Firstname + " " + userInfo.Lastname)
+      $('.mpname').text(userInfo.Firstname + " " + userInfo.Lastname);
+      if(userInfo.InsuranceNumber){
+        $('.insurance').text(userInfo.InsuranceNumber);
+      }
       if(userInfo.PhoneNumber){
         $('.userPhone').text(userInfo.PhoneNumber);
       }
@@ -341,7 +345,7 @@ var service = {
         console.log(data);
         if (data.AuthenticationResult.AuthStatus == "1") { //if success
           localStorage.userToken = data.AuthenticationResult.Token;
-          window.open('ntermin.html', '_self', 'location=yes');
+          service.saveCustomerProfileToLS(true);
         } else {
           navigator.notification.alert(
             data.AuthenticationResult.Message,  // message
@@ -410,8 +414,10 @@ var service = {
       type: 'GET',
       data: {Token: token},
       success: function (data) {
+        console.log('GetCustomerProfile');
         if (data.Status == "1") {
           localStorage.userInfo = JSON.stringify(data.Customer);
+          helper.updateUserToUi();
         }
         if(withRedirect){
           window.open('ntermin.html', '_self', 'location=yes');
