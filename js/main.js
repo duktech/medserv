@@ -482,8 +482,13 @@ var service = {
               var diffFromCurrentDate = moment.duration(moment_date.diff(current_date));
               var diffFromCurrentDateMinutes = diffFromCurrentDate.asMinutes();
 
-              html_history += '<div class="alert alert-warning" role="alert" data-bookingId="'+elem.BookingId+'">';
-
+              if(diffFromCurrentDateMinutes < 30 && !elem.CheckedIn) {
+                html_history += '<div class="alert alert-danger" role="alert" data-bookingId="' + elem.BookingId + '">';
+              }else if(elem.CheckedIn){
+                html_history += '<div class="alert alert-success" role="alert" data-bookingId="' + elem.BookingId + '">';
+              }else{
+                html_history += '<div class="alert alert-warning" role="alert" data-bookingId="' + elem.BookingId + '">';
+              }
               html_history += '<div class="col-xs-3">';
               html_history += '<img src="img/tic.png" alt="Tooth-Icon" class="notification-icon img-responsive" />';
               html_history += '</div>';
