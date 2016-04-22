@@ -1,7 +1,7 @@
 $(document).ready(function(){
   helper.updateUserToUi();
 });
-var serviceBaseUrl = 'http://192.168.0.94/boookmeWS/Service.svc/';//'http://medserv.duk-tech.com/WS/Service.svc/';
+var serviceBaseUrl = 'http://medserv.duk-tech.com/WS/Service.svc/';//'http://192.168.0.94/boookmeWS/Service.svc/';
 var helper = {
   set_calendar_active_days: function(days){
     setTimeout(function(){
