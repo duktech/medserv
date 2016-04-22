@@ -75,6 +75,7 @@
 					<input type="text" class="form-control" id="user_insurance" placeholder="INSURANCE ID">
 					<input type="text" class="form-control" id="user_phone" placeholder="PHONE NO.">
 					<input type="text" class="form-control" id="user_address" placeholder="ADDRESS">
+					<input type="date" class="form-control" id="DateOfBirth">
 					<div class="text-center form-control">
 						<label for="male" class="radio-inline"><input type="radio" name="gender" value="M" id="male"/>M</label>
 						<label for="female" class="radio-inline"><input type="radio" name="gender" value="F" id="female"/>F</label>
@@ -84,7 +85,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 nav-btn text-center">
-				<button class="btn edit" onclick="service.updateUserProfile($('#user_first_name').val(),$('#user_last_name').val(),$('#user_email').val(),$('#user_phone').val(),$('#user_address').val(),$('#user_insurance').val());">Save</button>
+				<button class="btn edit" onclick="service.updateUserProfile($('#user_first_name').val(),$('#user_last_name').val(),$('#user_email').val(),$('#user_phone').val(),$('#user_address').val(),$('#user_insurance').val(),$('#DateOfBirth').val());">Save</button>
 			</div>
 		</div>
 	</div>

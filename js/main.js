@@ -90,6 +90,7 @@ var helper = {
         var moment_date = moment(date);
         var years = moment().diff(moment_date, 'years');
         $('.userAge').text(years);
+        $('#DateOfBirth').val(moment_date.format('YYYY-MM-DD'));
       }
 
     }else{
@@ -456,10 +457,10 @@ var service = {
       }
     });
   },
-  updateUserProfile: function(first_name, last_name, email, phone, address, insurance){
+  updateUserProfile: function(first_name, last_name, email, phone, address, insurance,DateOfBirth){
     var gender = $("input[name='gender']:checked").val();
 
-    if(first_name == '' || last_name == '' || email == '' || phone == '' || address == '' || insurance == ''){
+    if(first_name == '' || last_name == '' || email == '' || phone == '' || address == '' || insurance == '' || DateOfBirth == ''){
       navigator.notification.alert(
         'All fields are mandatory!',  // message
         function(){},         // callback
@@ -482,7 +483,7 @@ var service = {
           phoneNumber: phone,
           address: address,
           gender: gender,
-          birthday: moment(new Date()).format('DD-MM-YYYY'),
+          birthday: moment(DateOfBirth).format('DD-MM-YYYY'),
           locality: ''
         }),
         contentType: 'application/json',
