@@ -48,7 +48,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn-ghost pagination-centered" onclick="service.user_login($('#userEmail').val(), $('#userPswd').val());">LOGIN</button>
+				<button class="btn-ghost pagination-centered" id="triggerLogin" onclick="service.user_login($('#userEmail').val(), $('#userPswd').val());">LOGIN</button>
 			</div>
 		</div>
 	</div>
@@ -76,7 +76,7 @@
 		}
 		function onDeviceReady() {
 			alert('rdy');
-			document.getElementById("obj_id")
+			document.getElementById("triggerLogin")
 					.addEventListener("click", callUserLogin, false);
 		}
 		function callUserLogin(){
