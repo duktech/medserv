@@ -1,7 +1,7 @@
 $(document).ready(function(){
   helper.updateUserToUi();
 });
-var serviceBaseUrl = 'http://medserv.duk-tech.com/WS/Service.svc/';//http://192.168.0.94/boookmeWS/Service.svc/';
+var serviceBaseUrl = 'http://192.168.0.94/boookmeWS/Service.svc/';//'http://medserv.duk-tech.com/WS/Service.svc/';
 var helper = {
   set_calendar_active_days: function(days){
     setTimeout(function(){
@@ -55,19 +55,41 @@ var helper = {
     if(userInfo){
       userInfo = JSON.parse(userInfo);
       console.log(userInfo);
+
       $('.avatar-name').text(userInfo.Firstname + " " + userInfo.Lastname);
       $('.mpname').text(userInfo.Firstname + " " + userInfo.Lastname);
+
+      $('#user_first_name').val(userInfo.Firstname);
+      $('#user_last_name').val(userInfo.Lastname);
+
       if(userInfo.InsuranceNumber){
         $('.insurance').text(userInfo.InsuranceNumber);
+        $('#user_insurance').val(userInfo.InsuranceNumber);
       }
       if(userInfo.PhoneNumber){
         $('.userPhone').text(userInfo.PhoneNumber);
+        $('#user_phone').val(userInfo.PhoneNumber);
       }
       if(userInfo.Email){
         $('.userEmail').text(userInfo.Email);
+        $('#user_email').val(userInfo.Email);
       }
       if(userInfo.Address){
         $('.userAddress').text(userInfo.Address);
+        $('#user_address').val(userInfo.Address);
+      }
+      if(userInfo.CustomerSex){
+        $('.userGender').text(userInfo.CustomerSex);
+        $('input:radio[name=gender]').filter('[value='+userInfo.CustomerSex+']').prop('checked', true);
+
+      }else{
+        $('input:radio[name=gender]').filter('[value=M]').prop('checked', true);
+      }
+      if(userInfo.DateOfBirth){
+        var date = eval("new " + userInfo.DateOfBirth.slice(1, -1));
+        var moment_date = moment(date);
+        var years = moment().diff(moment_date, 'years');
+        $('.userAge').text(years);
       }
 
     }else{
@@ -345,7 +367,7 @@ var service = {
         console.log(data);
         if (data.AuthenticationResult.AuthStatus == "1") { //if success
           localStorage.userToken = data.AuthenticationResult.Token;
-          service.saveCustomerProfileToLS(true);
+          service.saveCustomerProfileToLS('ntermin.html');
         } else {
           navigator.notification.alert(
             data.AuthenticationResult.Message,  // message
@@ -387,7 +409,7 @@ var service = {
         console.log(data);
         if (data.AuthenticationResult.AuthStatus == "1") { //if success
           localStorage.userToken = data.AuthenticationResult.Token;
-          service.saveCustomerProfileToLS(true);
+          service.saveCustomerProfileToLS('ntermin.html');
         } else {
           navigator.notification.alert(
             data.AuthenticationResult.Message,  // message
@@ -407,7 +429,7 @@ var service = {
       }
     });
   },
-  saveCustomerProfileToLS: function (withRedirect){
+  saveCustomerProfileToLS: function (redirect){
     var token = localStorage.userToken;
     $.ajax({
       url: serviceBaseUrl + 'GetCustomerProfile',
@@ -419,8 +441,8 @@ var service = {
           localStorage.userInfo = JSON.stringify(data.Customer);
           helper.updateUserToUi();
         }
-        if(withRedirect){
-          window.open('ntermin.html', '_self', 'location=yes');
+        if(redirect){
+          window.open(redirect, '_self', 'location=yes');
         }
       },
       error: function (err) {
@@ -433,6 +455,60 @@ var service = {
         );
       }
     });
+  },
+  updateUserProfile: function(first_name, last_name, email, phone, address, insurance){
+    var gender = $("input[name='gender']:checked").val();
+
+    if(first_name == '' || last_name == '' || email == '' || phone == '' || address == '' || insurance == ''){
+      navigator.notification.alert(
+        'All fields are mandatory!',  // message
+        function(){},         // callback
+        'Warning',            // title
+        'Ok'                  // buttonName
+      );
+      return 0;
+    }else{
+
+      var userToken = localStorage.userToken;
+      $.ajax({
+        url: serviceBaseUrl + 'UpdateCustomerProfileMobile',
+        type: 'POST',
+        data: JSON.stringify({
+          Token: userToken,
+          firstname: first_name,
+          lastname: last_name,
+          email: email,
+          insuranceNumber: insurance,
+          phoneNumber: phone,
+          address: address,
+          gender: gender,
+          birthday: moment(new Date()).format('DD-MM-YYYY'),
+          locality: ''
+        }),
+        contentType: 'application/json',
+        success: function (data) {
+          console.log(data);
+          if (data.Status == "1") { //if success
+            service.saveCustomerProfileToLS('mein-profil.html');
+          } else {
+            navigator.notification.alert(
+              data.AuthenticationResult.Message,  // message
+              function(){},         // callback
+              'Warning',            // title
+              'Ok'                  // buttonName
+            );
+          }
+        },
+        error: function (err) {
+          navigator.notification.alert(
+            'Error',  // message
+            function(){},         // callback
+            'Warning',            // title
+            'Ok'                  // buttonName
+          );
+        }
+      });
+    }
   },
   get_bookings_for_user: function (token) {
     if (!token) {

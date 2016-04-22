@@ -979,3 +979,21 @@ h3.second-title{
 	height: 40px;
 	line-height: 40px;
 }
+.nav-btn .btn.edit{
+	padding: 0;
+	font-size: 20px;
+	background: transparent;
+	color: #fff;
+	width: 100%;
+	line-height: 60px;
+}
+td.nameContainer{
+	vertical-align: middle;
+}
+.userAvatar{
+	max-width: 60px;
+	border-radius: 50%;
+}
+.userAvatar.profilePage{
+	margin-top: 100px;
+}
