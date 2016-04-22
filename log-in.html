@@ -26,7 +26,7 @@
 
 </head>
 
-<body onload="init();">
+<body>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -48,7 +48,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn-ghost pagination-centered" id="triggerLogin" onclick="service.user_login($('#userEmail').val(), $('#userPswd').val());">LOGIN</button>
+				<button class="btn-ghost pagination-centered" onclick="service.user_login($('#userEmail').val(), $('#userPswd').val());">LOGIN</button>
 			</div>
 		</div>
 	</div>
@@ -67,23 +67,11 @@
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/html5shiv.min.js"></script>
 
-	<script src="js/moment.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
 		var current_user = helper.get_current_user();
 		if(current_user){//logged in
 			window.open('ntermin.html', '_self', 'location=yes');
-		}
-		function onDeviceReady() {
-			alert('rdy');
-			document.getElementById("triggerLogin")
-					.addEventListener("click", callUserLogin, false);
-		}
-		function callUserLogin(){
-			service.user_login($('#userEmail').val(), $('#userPswd').val());
-		}
-		function init() {
-			document.addEventListener("deviceready", onDeviceReady, false);
 		}
 	</script>
 </body>

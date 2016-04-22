@@ -389,9 +389,7 @@ var service = {
     });
   },
   user_login: function (email, pswd) {
-    alert('login');
     if(email == '' || pswd == ''){
-      alert('beled gol');
       navigator.notification.alert(
         'Both fields are mandatory!',  // message
         function(){},         // callback
@@ -400,7 +398,6 @@ var service = {
       );
       return 0;
     }
-    alert('apel login');
     $.ajax({
       url: serviceBaseUrl + 'Login',
       type: 'POST',
@@ -410,7 +407,6 @@ var service = {
       }),
       contentType: 'application/json',
       success: function (data) {
-        alert('success login');
         console.log(data);
         if (data.AuthenticationResult.AuthStatus == "1") { //if success
           localStorage.userToken = data.AuthenticationResult.Token;
@@ -425,7 +421,6 @@ var service = {
         }
       },
       error: function (err) {
-        alert('error login');
         navigator.notification.alert(
           'Error',  // message
           function(){},         // callback
