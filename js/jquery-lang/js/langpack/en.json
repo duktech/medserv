@@ -1,7 +1,15 @@
 {
 	"token": {
-		"Log in": "Einloggen",
-		"SIGN UP": "ANMELDEN",
-		"selectLang": "Wähle deine Sprache"
+		"signUp": "SIGN UP",
+		"selectLang": "Select your language",
+		"login": "LOG IN",
+		"VORNAME": "FIRST NAME",
+		"NACHNAME": "LAST NAME",
+		"E-MAIL": "E-MAIL",
+		"VERSICHERUNGSNUMMER": "INSURANCE ID",
+		"PASSWORT": "PASSWORD",
+		"PASSWORT BESTÄTIGEN": "CONFIRM PASSWORD",
+		"ICH STIMME DEN": "I AGREE TO ",
+		"terms": "TERMS"
 	}
 }

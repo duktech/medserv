@@ -1,7 +1,17 @@
 {
 	"token": {
-		"Log in": "Logare",
-		"SIGN UP": "INSCRIE-TE",
-		"selectLang": "Selectează limba"
+		"signUp": "CREEAZĂ CONT",
+		"selectLang": "Selectează limba",
+		"login": "LOGHEAZĂ-TE",
+		"VORNAME": "PRENUME",
+		"NACHNAME": "NUME",
+		"E-MAIL": "ADRESA DE E-MAIL",
+		"VERSICHERUNGSNUMMER": "NUMĂR DE ASIGURARE",
+		"PASSWORT": "PAROLA",
+		"PASSWORT BESTÄTIGEN": "CONFIRMĂ PAROLA",
+		"ICH STIMME DEN": "SUNT DE ACORD CU ",
+		"terms": "TERMENII"
 	}
 }
+
+		

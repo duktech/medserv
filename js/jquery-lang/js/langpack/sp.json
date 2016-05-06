@@ -1,7 +1,15 @@
 {
 	"token": {
-		"Log in": "acceder",
-		"SIGN UP": "REGÍSTRATE",
-		"selectLang": "elige tu idioma"
+		"signUp": "REGÍSTRATE",
+		"selectLang": "Seleccione el idioma",
+		"login": "INICIAR SESIÓN",
+		"VORNAME": "NOMBRE DE PILA",
+		"NACHNAME": "APELLIDO",
+		"E-MAIL": "E-MAIL",
+		"VERSICHERUNGSNUMMER": "NÚMERO DE SEGURIDAD SOCIAL",
+		"PASSWORT": "CONTRASEÑA",
+		"PASSWORT BESTÄTIGEN": "CONFIRMAR CONTRASEÑA",
+		"ICH STIMME DEN": "ACEPTO LOS ",
+		"terms": "TÉRMINOS"
 	}
 }

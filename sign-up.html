@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<div class="navbar navbar-default navbar-fixed-top">
-					<h1 class="window-title text-center">SIGN UP</h1>
+					<h1 class="window-title text-center" lang="de" data-lang-token="signUp">ANMELDEN</h1>
 					<button class="home-btn pull-right" onclick="window.open('index.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
 				</div>
 			</div>
@@ -39,12 +39,12 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="form-group">
-					<input type="text" class="form-control" id="user_first_name" placeholder="FIRST NAME">
-					<input type="text" class="form-control" id="user_last_name" placeholder="LAST NAME">
-					<input type="text" class="form-control" id="user_email" placeholder="E-MAIL">
-					<input type="text" class="form-control" id="user_insurance" placeholder="INSURANCE ID">
-					<input type="password" class="form-control" id="user_pswd" placeholder="PASSWORD">
-					<input type="password" class="form-control" id="user_cpswd" placeholder="CONFIRM PASSWORD">
+					<input type="text" class="form-control" id="user_first_name" placeholder="VORNAME" lang="de">
+					<input type="text" class="form-control" id="user_last_name" placeholder="NACHNAME" lang="de">
+					<input type="text" class="form-control" id="user_email" placeholder="E-MAIL" lang="de">
+					<input type="text" class="form-control" id="user_insurance" placeholder="VERSICHERUNGSNUMMER" lang="de">
+					<input type="password" class="form-control" id="user_pswd" placeholder="PASSWORT" lang="de">
+					<input type="password" class="form-control" id="user_cpswd" placeholder="PASSWORT BESTÄTIGEN" lang="de">
 				</div>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<div class="terms-group">
-					<label for="terms-checkbox">I AGREE TO <a href="#" data-toggle="modal" data-target="#terms-modal">TERMS</a></label>
+					<label for="terms-checkbox" lang="de" data-lang-token="agreeTerms">ICH STIMME DEN <a href="#" data-toggle="modal" data-target="#terms-modal" lang="de" data-lang-token="terms">AGB ZU</a></label> <!--Translation for "#" not found in language pack: sp-->
 					<input type="checkbox" id="terms-checkbox" />
 					<div id="terms-modal" class="modal fade" role="dialog">
 						<div class="modal-dialog">
@@ -89,7 +89,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12"> 
-				<button class="btn-ghost" onclick="service.user_register($('#user_first_name').val(),$('#user_last_name').val(),$('#user_email').val(),$('#user_pswd').val(),$('#user_cpswd').val(),$('#user_insurance').val());">Sign up</button>
+				<button class="btn-ghost" onclick="service.user_register($('#user_first_name').val(),$('#user_last_name').val(),$('#user_email').val(),$('#user_pswd').val(),$('#user_cpswd').val(),$('#user_insurance').val());" lang="de" data-lang-token="signUp">Sign up</button>
 			</div>
 		</div>
 
