@@ -10,6 +10,7 @@
 		"PASSWORT": "CONTRASEÑA",
 		"PASSWORT BESTÄTIGEN": "CONFIRMAR CONTRASEÑA",
 		"ICH STIMME DEN": "ACEPTO LOS ",
-		"terms": "TÉRMINOS"
+		"terms": "TÉRMINOS",
+		"noPrefProvider": "No hay proveedores preferidas seleccionadas"
 	}
 }

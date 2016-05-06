@@ -10,7 +10,8 @@
 		"PASSWORT": "PAROLA",
 		"PASSWORT BESTÄTIGEN": "CONFIRMĂ PAROLA",
 		"ICH STIMME DEN": "SUNT DE ACORD CU ",
-		"terms": "TERMENII"
+		"terms": "TERMENII",
+		"noPrefProvider": "Nu există furnizori preferati"
 	}
 }
 

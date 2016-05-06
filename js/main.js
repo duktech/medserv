@@ -245,7 +245,7 @@ var helper = {
 
       });
     }else{
-      html = '<tr><td><h2 class="text-center">No prefered providers selected</h2></td></tr>';
+      html = '<tr><td><h2 class="text-center" lang="de"  data-lang-token="noPrefProvider">Keine bevorzugte Anbieter ausgewählt</h2></td></tr>';
     }
     $('.prefered_container').append(html);
     $('button.changePrefProvider').click(function(e){

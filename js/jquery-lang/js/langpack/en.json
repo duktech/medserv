@@ -10,6 +10,7 @@
 		"PASSWORT": "PASSWORD",
 		"PASSWORT BESTÄTIGEN": "CONFIRM PASSWORD",
 		"ICH STIMME DEN": "I AGREE TO ",
-		"terms": "TERMS"
+		"terms": "TERMS",
+		"noPrefProvider": "No prefered providers selected"
 	}
 }
