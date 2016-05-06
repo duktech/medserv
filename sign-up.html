@@ -115,14 +115,7 @@
 	<script src="js/moment.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
-		var lang = new Lang();
-		lang.dynamic('en', 'js/jquery-lang/js/langpack/en.json');
-		lang.dynamic('ro', 'js/jquery-lang/js/langpack/ro.json');
-		lang.dynamic('sp', 'js/jquery-lang/js/langpack/sp.json');
-		lang.init({
-			defaultLang: 'de'
-		});
-		
+
 		var current_user = helper.get_current_user();
 		if(current_user){//logged in
 			window.open('ntermin.html', '_self', 'location=yes');

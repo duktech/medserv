@@ -1,3 +1,11 @@
+var lang = new Lang();
+lang.dynamic('en', 'js/jquery-lang/js/langpack/en.json');
+lang.dynamic('ro', 'js/jquery-lang/js/langpack/ro.json');
+lang.dynamic('sp', 'js/jquery-lang/js/langpack/sp.json');
+lang.init({
+  defaultLang: 'de'
+});
+
 $(document).ready(function(){
   helper.updateUserToUi();
 });
