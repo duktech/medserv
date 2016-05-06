@@ -43,8 +43,8 @@
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu text-center" aria-labelledby="dropdownMenu1">
-						<li><a href="#" onclick="window.lang.change('en'); return false;">English</a></li>
 						<li><a href="#" onclick="window.lang.change('de'); return false;">German</a></li>
+						<li><a href="#" onclick="window.lang.change('en'); return false;">English</a></li>
 						<li><a href="#" onclick="window.lang.change('ro'); return false;">Romanian</a></li>
 						<li><a href="#" onclick="window.lang.change('sp'); return false;">Spanish</a></li>
 					</ul>
@@ -76,13 +76,13 @@
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
 		var lang = new Lang();
-		lang.dynamic('de', 'js/jquery-lang/js/langpack/de.json');
+		lang.dynamic('en', 'js/jquery-lang/js/langpack/en.json');
 		lang.dynamic('ro', 'js/jquery-lang/js/langpack/ro.json');
 		lang.dynamic('sp', 'js/jquery-lang/js/langpack/sp.json');
 		lang.init({
-			defaultLang: 'en'
+			defaultLang: 'de'
 		});
-		
+
 		var current_user = helper.get_current_user();
 		if(current_user){//logged in
 			window.open('ntermin.html', '_self', 'location=yes');
