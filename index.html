@@ -24,7 +24,7 @@
 <body>
 
 	<div class="navbar navbar-default navbar-fixed-top">
-		<button href="#" class="sign-up pull-right" onclick="window.open('sign-up.html', '_self', 'location=yes');">SIGN UP</button>
+		<button class="sign-up pull-right" onclick="window.open('sign-up.html', '_self', 'location=yes');" lang="en">SIGN UP</button>
 	</div>
 
 	<div class="container-fluid">
@@ -37,7 +37,23 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn-ghost pagination-centered" onclick="window.open('log-in.html', '_self', 'location=yes');">Log in</button>
+				<div class="dropdown text-center">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<span lang="en" data-lang-token="selectLang">Select your language</span>
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu text-center" aria-labelledby="dropdownMenu1">
+						<li><a href="#" onclick="window.lang.change('en'); return false;">English</a></li>
+						<li><a href="#" onclick="window.lang.change('de'); return false;">German</a></li>
+						<li><a href="#" onclick="window.lang.change('ro'); return false;">Romanian</a></li>
+						<li><a href="#" onclick="window.lang.change('sp'); return false;">Spanish</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<button class="btn-ghost pagination-centered" onclick="window.open('log-in.html', '_self', 'location=yes');" lang="en">Log in</button>
 			</div>
 		</div>
 
@@ -53,8 +69,20 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jasny-bootstrap.min.js"></script>
 	<script src="js/moment.js"></script>
+
+	<script src="js/jquery-lang/js/js.cookie.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/jquery-lang/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
+
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
+		var lang = new Lang();
+		lang.dynamic('de', 'js/jquery-lang/js/langpack/de.json');
+		lang.dynamic('ro', 'js/jquery-lang/js/langpack/ro.json');
+		lang.dynamic('sp', 'js/jquery-lang/js/langpack/sp.json');
+		lang.init({
+			defaultLang: 'en'
+		});
+		
 		var current_user = helper.get_current_user();
 		if(current_user){//logged in
 			window.open('ntermin.html', '_self', 'location=yes');
