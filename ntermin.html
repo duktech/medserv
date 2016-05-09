@@ -52,6 +52,15 @@
 			<li><a href="#">Befunde</a></li>
 			<li class="divider"></li>
 			<li><a href="#" onclick="helper.logOut();">Einstellungen</a></li>
+			<li class="divider"></li>
+			<li class="dropdown"><a href="#" data-toggle="dropdown"><span lang="de" data-lang-token="selectLang">Sprache wählen</span></a>
+				<ul class="dropdown-menu langSelect">
+					<li><a href="#" onclick="window.lang.change('de'); return false;" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">German</a></li>
+					<li><a href="#" onclick="window.lang.change('en'); return false;" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">English</a></li>
+					<li><a href="#" onclick="window.lang.change('ro'); return false;" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">Romanian</a></li>
+					<li><a href="#" onclick="window.lang.change('sp'); return false;" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">Spanish</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 

@@ -997,3 +997,6 @@ td.nameContainer{
 .userAvatar.profilePage{
 	margin-top: 100px;
 }
+.dropdown .langSelect{
+	font-size: 14px;
+}
