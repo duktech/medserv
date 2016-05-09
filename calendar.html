@@ -42,17 +42,17 @@
 		</table>
 	</a>
 	<ul class="nav navmenu-nav">
-		<li><a href="mein-profil.html">Mein profil</a></li>
+		<li><a href="mein-profil.html" lang="de" data-lang-token="myProfile">Mein profil</a></li>
 		<li class="divider"></li>
-		<li><a href="termine.html">Termine</a></li>
+		<li><a href="termine.html" lang="de" data-lang-token="appointments">Termine</a></li>
 		<li class="divider"></li>
-		<li><a href="mein-arzte.html">Meine arzte</a></li>
+		<li><a href="mein-arzte.html" lang="de" data-lang-token="myDoctors">Meine arzte</a></li>
 		<li class="divider"></li>
-		<li><a href="#">NACHRICHTEN</a></li>
+		<li><a href="#" lang="de" data-lang-token="news">NACHRICHTEN</a></li>
 		<li class="divider"></li>
-		<li><a href="#">Befunde</a></li>
+		<li><a href="#" lang="de" data-lang-token="results">Befunde</a></li>
 		<li class="divider"></li>
-		<li><a href="#" onclick="helper.logOut();">Einstellungen</a></li>
+		<li><a href="#" onclick="helper.logOut();" lang="de" data-lang-token="settings">Einstellungen</a></li>
 	</ul>
 </div>
 
@@ -64,7 +64,7 @@
 		<span class="icon-bar"></span>
 	</button>
 	<div class="pull-left icon-cont"><img src="img/logo.png" alt="Logo icon" class="logo-icon" /> </div>
-	<h1 class="window-title">Calendar</h1>
+	<h1 class="window-title" lang="de" data-lang-token="calendar">Kalender</h1>
 	<button class="home-btn pull-right" onclick="window.open('ntermin.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
 </div>
 
@@ -74,7 +74,7 @@
 				<div class="container-fluid">
 					<div class="row bs-wizard" style="border-bottom:0;">
 						<div class="col-xs-3 bs-wizard-step complete">
-							<div class="text-center bs-wizard-stepnum">Step 1</div>
+							<div class="text-center bs-wizard-stepnum" lang="de" data-lang-token="step1">Schritt 1</div>
 							<div class="progress">
 								<div class="progress-bar"></div>
 							</div>
@@ -96,7 +96,7 @@
 
 						<div class="col-xs-3 bs-wizard-step active">
 							<!-- complete -->
-							<div class="text-center bs-wizard-stepnum">DATE</div>
+							<div class="text-center bs-wizard-stepnum" lang="de" data-lang-token="date">DATUM</div>
 							<div class="progress">
 								<div class="progress-bar"></div>
 							</div>
@@ -129,22 +129,22 @@
 			<div class="responsive-calendar">
 				<div class="controls">
 					<a class="pull-left" data-go="prev">
-						<div class="btn btn-primary">Prev</div>
+						<div class="btn btn-primary" lang="de" data-lang-token="prev">Zurück</div>
 					</a>
 					<h4><span data-head-year></span> <span data-head-month></span></h4>
 					<a class="pull-right" data-go="next">
-						<div class="btn btn-primary">Next</div>
+						<div class="btn btn-primary" lang="de" data-lang-token="next">Nächste</div>
 					</a>
 				</div>
 				<hr/>
 				<div class="day-headers">
-					<div class="day header">Mon</div>
-					<div class="day header">Tue</div>
-					<div class="day header">Wed</div>
-					<div class="day header">Thu</div>
-					<div class="day header">Fri</div>
-					<div class="day header">Sat</div>
-					<div class="day header">Sun</div>
+					<div class="day header" lang="de" data-lang-token="monday">Mon</div>
+					<div class="day header" lang="de" data-lang-token="tuesday">Tue</div>
+					<div class="day header" lang="de" data-lang-token="wednesday">Wed</div>
+					<div class="day header" lang="de" data-lang-token="thursday">Thu</div>
+					<div class="day header" lang="de" data-lang-token="friday">Fri</div>
+					<div class="day header" lang="de" data-lang-token="saturday">Sat</div>
+					<div class="day header" lang="de" data-lang-token="sunday">Sun</div>
 				</div>
 				<div class="days" data-group="days">
 
@@ -155,7 +155,7 @@
 		<div class="row">
 			<div class="col-xs-12 nav-btn">
 				<button class="round-btn pull-left" onclick="window.open('ntermin3.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
-				<button class="round-btn middle go_to_artze">Change Provider</button>
+				<button class="round-btn middle go_to_artze" lang="de" data-lang-token="changeProvider">Providerwechsel</button>
 				<button class="round-btn pull-right" onclick="helper.go_to_schedule();"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 			</div>
 

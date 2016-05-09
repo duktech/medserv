@@ -40,17 +40,17 @@
 			</table>
 		</a>
 		<ul class="nav navmenu-nav">
-			<li><a href="mein-profil.html">Mein profil</a></li>
+			<li><a href="mein-profil.html" lang="de" data-lang-token="myProfile">Mein profil</a></li>
 			<li class="divider"></li>
-			<li><a href="termine.html">Termine</a></li>
+			<li><a href="termine.html" lang="de" data-lang-token="appointments">Termine</a></li>
 			<li class="divider"></li>
-			<li><a href="mein-arzte.html">Meine arzte</a></li>
+			<li><a href="mein-arzte.html" lang="de" data-lang-token="myDoctors">Meine arzte</a></li>
 			<li class="divider"></li>
-			<li><a href="#">NACHRICHTEN</a></li>
+			<li><a href="#" lang="de" data-lang-token="news">Nachrichten</a></li>
 			<li class="divider"></li>
-			<li><a href="#">Befunde</a></li>
+			<li><a href="#" lang="de" data-lang-token="results">Befunde</a></li>
 			<li class="divider"></li>
-			<li><a href="#" onclick="helper.logOut();">Einstellungen</a></li>
+			<li><a href="#" onclick="helper.logOut();" lang="de" data-lang-token="settings">Einstellungen</a></li>
 		</ul>
 	</div>
 
@@ -62,30 +62,30 @@
 			<span class="icon-bar"></span>
 		</button>
 		<div class="pull-left icon-cont"><img src="img/logo.png" alt="Logo icon" class="logo-icon" /> </div>
-		<h1 class="window-title">MEIN PROFIL EDIT</h1>
+		<h1 class="window-title" lang="de" data-lang-token="editMyProfile">MEIN PROFIL BEARBEITEN</h1>
 		<button class="home-btn pull-right" onclick="window.open('index.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
 	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="form-group">
-					<input type="text" class="form-control" id="user_first_name" placeholder="FIRST NAME">
-					<input type="text" class="form-control" id="user_last_name" placeholder="LAST NAME">
-					<input type="text" class="form-control" id="user_email" placeholder="E-MAIL">
-					<input type="text" class="form-control" id="user_insurance" placeholder="INSURANCE ID">
-					<input type="text" class="form-control" id="user_phone" placeholder="PHONE NO.">
-					<input type="text" class="form-control" id="user_address" placeholder="ADDRESS">
+					<input type="text" class="form-control" id="user_first_name" placeholder="VORNAME" lang="de">
+					<input type="text" class="form-control" id="user_last_name" placeholder="NACHNAME" lang="de">
+					<input type="text" class="form-control" id="user_email" placeholder="E-MAIL" lang="de">
+					<input type="text" class="form-control" id="user_insurance" placeholder="VERSICHERUNGSNUMMER" lang="de">
+					<input type="text" class="form-control" id="user_phone" placeholder="TELEFONNUMMER" lang="de">
+					<input type="text" class="form-control" id="user_address" placeholder="ADRESSE" lang="de">
 					<input type="date" class="form-control" id="DateOfBirth">
 					<div class="text-center form-control">
-						<label for="male" class="radio-inline"><input type="radio" name="gender" value="M" id="male"/>M</label>
-						<label for="female" class="radio-inline"><input type="radio" name="gender" value="F" id="female"/>F</label>
+						<label for="male" class="radio-inline" lang="de" data-lang-token="male"><input type="radio" name="gender" value="M" id="male"/>M</label>
+						<label for="female" class="radio-inline" lang="de" data-lang-token="female"><input type="radio" name="gender" value="F" id="female"/>W</label>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12 nav-btn text-center">
-				<button class="btn edit" onclick="service.updateUserProfile($('#user_first_name').val(),$('#user_last_name').val(),$('#user_email').val(),$('#user_phone').val(),$('#user_address').val(),$('#user_insurance').val(),$('#DateOfBirth').val());">Save</button>
+				<button class="btn edit" onclick="service.updateUserProfile($('#user_first_name').val(),$('#user_last_name').val(),$('#user_email').val(),$('#user_phone').val(),$('#user_address').val(),$('#user_insurance').val(),$('#DateOfBirth').val());" lang="de" data-lang-token="save">Speichern</button>
 			</div>
 		</div>
 	</div>
