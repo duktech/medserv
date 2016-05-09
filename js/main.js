@@ -11,6 +11,10 @@ $(document).ready(function(){
 });
 var serviceBaseUrl = 'http://medserv.duk-tech.com/WS/Service.svc/';//'http://192.168.0.94/boookmeWS/Service.svc/';
 var helper = {
+  navBack: function(){
+    parent.history.back();
+    return false;
+  },
   set_calendar_active_days: function(days){
     setTimeout(function(){
       $.each(days, function(index, elem){
