@@ -52,6 +52,8 @@
 			<li><a href="#" lang="de" data-lang-token="results">Befunde</a></li>
 			<li class="divider"></li>
 			<li><a href="#" onclick="helper.logOut();" lang="de" data-lang-token="settings">Einstellungen</a></li>
+			<li class="divider"></li>
+			<li><a href="lang-select.html" lang="de" data-lang-token="selectLang">Sprache wählen</a></li>
 		</ul>
 	</div>
 
@@ -129,7 +131,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 nav-btn">
-				<button class="round-btn pull-left" onclick="window.open('ntermin2.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+				<button class="round-btn pull-left" onclick="helper.navBack();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
 				<button class="round-btn middle go_to_artze hidden" lang="de" data-lang-token="changeProvider">Providerwechsel</button>
 				<button class="round-btn pull-right" onclick="helper.go_to_calendar();"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 			</div>

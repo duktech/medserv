@@ -662,6 +662,10 @@ input.cmn-toggle-round-flat + label::before {
 	.window-title {
 		font-size: 20px;
 		line-height: 50px;
+		max-width: 190px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	/* MENU */
 	.nav>li>a {
@@ -997,6 +1001,9 @@ td.nameContainer{
 .userAvatar.profilePage{
 	margin-top: 100px;
 }
-.dropdown .langSelect{
-	font-size: 14px;
+.langSelectList{
+	margin-top: 50px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
 }

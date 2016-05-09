@@ -40,17 +40,17 @@
 			</table>
 		</a>
 		<ul class="nav navmenu-nav">
-			<li><a href="mein-profil.html" lang="de" data-lang-token="myProfile">Mein profil</a></li>
+			<li><a href="mein-profil.html">Mein profil</a></li>
 			<li class="divider"></li>
-			<li><a href="termine.html" lang="de" data-lang-token="appointments">Termine</a></li>
+			<li><a href="termine.html">Termine</a></li>
 			<li class="divider"></li>
-			<li><a href="mein-arzte.html" lang="de" data-lang-token="myDoctors">Meine arzte</a></li>
+			<li><a href="mein-arzte.html">Meine arzte</a></li>
 			<li class="divider"></li>
-			<li><a href="#" lang="de" data-lang-token="news">NACHRICHTEN</a></li>
+			<li><a href="#">NACHRICHTEN</a></li>
 			<li class="divider"></li>
-			<li><a href="#" lang="de" data-lang-token="results">Befunde</a></li>
+			<li><a href="#">Befunde</a></li>
 			<li class="divider"></li>
-			<li><a href="#" onclick="helper.logOut();" lang="de" data-lang-token="settings">Einstellungen</a></li>
+			<li><a href="#" onclick="helper.logOut();">Einstellungen</a></li>
 			<li class="divider"></li>
 			<li><a href="lang-select.html" lang="de" data-lang-token="selectLang">Sprache wählen</a></li>
 		</ul>
@@ -64,48 +64,29 @@
 			<span class="icon-bar"></span>
 		</button>
 		<div class="pull-left icon-cont"><img src="img/logo.png" alt="Logo icon" class="logo-icon" /> </div>
-		<h1 class="window-title" lang="de" data-lang-token="myProfile">MEIN PROFIL</h1>
+		<h1 class="window-title" lang="de" data-lang-token="selectLang">Sprache wählen</h1>
 		<button class="home-btn pull-right" onclick="window.open('index.html', '_self', 'location=yes');"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>
 	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="row">
-					<div class="col-xs-12 text-center">
-						<img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y" class="userAvatar profilePage" />
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 text-center">
-						<h3 class="mpname">-</h3><div><span class="insurance">(-)</span></div><br></h3>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 text-center">
-						<div><strong><span class="userAge">-</span>, <span class="userGender">-</span> </strong></div>
-					</div>
-					<hr class="separator">
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="glyphicon glyphicon-phone pull-left" aria-hidden="true"> <span class="userPhone"></span></div>
-					</div>
-					<br>
-					<div class="col-xs-12">
-						<div class="glyphicon glyphicon-envelope pull-left" aria-hidden="true"> <span class="userEmail"></span></div>
-					</div>
-					<br>
-					<div class="col-xs-12">
-						<div class="glyphicon glyphicon-map-marker pull-left" aria-hidden="true"> <span class="userAddress"></span></div>
-					</div>
-				</div>
+
+				<ul class="langSelectList">
+					<li><a href="#" onclick="window.lang.change('de'); return false;">German</a></li>
+					<li><a href="#" onclick="window.lang.change('en'); return false;">English</a></li>
+					<li><a href="#" onclick="window.lang.change('ro'); return false;">Romanian</a></li>
+					<li><a href="#" onclick="window.lang.change('sp'); return false;">Spanish</a></li>
+				</ul>
+
 			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-xs-12 nav-btn text-center">
-				<button class="btn edit" onclick="window.open('mein-profil-edit.html', '_self', 'location=yes');" lang="de" data-lang-token="edit">Profil bearbeiten</button>
+			<div class="col-xs-12 nav-btn">
+				<button class="round-btn pull-left" onclick="helper.navBack();"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
 			</div>
 		</div>
+
 	</div>
 	<!-- /.container -->
 
