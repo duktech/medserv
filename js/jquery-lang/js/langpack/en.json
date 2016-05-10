@@ -49,6 +49,8 @@
 		"chooseApp": "Choose an appointment",
 		"schedule": "SCHEDULE",
 		"success": "Success",
-		"summary": "Summary"
+		"summary": "Summary",
+		"successTitle": "Congratulations"
+		"appSubmitted": "Your appointment has been successfully submitted"
 	}
 }

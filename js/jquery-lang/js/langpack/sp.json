@@ -49,6 +49,8 @@
 		"chooseApp": "Elige una cita",
 		"schedule": "HORARIO",
 		"success": "ÉXITO",
-		"summary": "Sumario"
+		"summary": "Sumario",
+		"successTitle": "Felicitaciones",
+		"appSubmitted": "Su designación ha sido enviado correctamente"
 	}
 }

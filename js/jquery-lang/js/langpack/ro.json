@@ -49,8 +49,8 @@
 		"chooseApp": "Alege o programare",
 		"schedule": "PROGRAM",
 		"success": "SUCCES",
-		"summary": "Sumar"
+		"summary": "Sumar",
+		"successTitle": "Felicitări",
+		"appSubmitted": "Programarea dvs. a fost efectuată cu succes"
 	}
 }
-
-		
