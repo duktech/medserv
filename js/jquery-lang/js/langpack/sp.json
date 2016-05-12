@@ -53,6 +53,12 @@
 		"successTitle": "Felicitaciones",
 		"appSubmitted": "Su designación ha sido enviado correctamente",
 		"newTermin1": "newTermin1",
-		"newTermin2": "newTermin2"
+		"newTermin2": "newTermin2",
+		"In Service-Beschreibung": "In Service-Beschreibung",
+		"selectHour": "selectHour",
+		"noProviderForCateg": "noProviderForCateg",
+		"noServiceForProvider": "noServiceForProvider",
+		"notFree": "notFree",
+		"free": "free"
 	}
 }

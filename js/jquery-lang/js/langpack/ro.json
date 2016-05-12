@@ -53,7 +53,12 @@
 		"successTitle": "Felicitări",
 		"appSubmitted": "Programarea dvs. a fost efectuată cu succes",
 		"newTermin1": "newTermin1",
-		"newTermin2": "newTermin2"
-		
+		"newTermin2": "newTermin2",
+		"In Service-Beschreibung": "In Service-Beschreibung",
+		"selectHour": "selectHour",
+		"noProviderForCateg": "noProviderForCateg",
+		"noServiceForProvider": "noServiceForProvider",
+		"notFree": "notFree",
+		"free": "free"
 	}
 }

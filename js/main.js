@@ -185,11 +185,11 @@ var helper = {
       html += '<tr>';
       var cclass = 'nava';
       var disabled = 'disabled';
-      var isFreeText = 'nicht frei';
+      var isFreeText = '<span lang="de" data-lang-token="notFree">nicht frei</span>>';
       if(elem.IsAvailable){
         cclass = 'ava';
         disabled = '';
-        isFreeText = 'frei';
+        isFreeText = '<span lang="de" data-lang-token="free">frei</span>';
       }
       var start_date = eval("new " + elem.Time.slice(1, -1));
       var moment_date = moment(start_date);
@@ -200,7 +200,7 @@ var helper = {
       html +=  '</td>';
       html += '<td class="my_schedule_hour '+disabled+'" data-time="'+elem.Time+'" data-duration="'+service_duration+'">';
       if(elem.IsAvailable) {
-        html += 'Select'
+        html += '<span lang="de" data-lang-token="selectHour">wählen</span>'
       }
       html +=  '</td>';
       html += '</tr>';
@@ -585,15 +585,15 @@ var service = {
               html_history += '<div class="col-xs-7">';
               html_history += '<table class="notification-text">';
               html_history += '<tr>';
-              html_history += '<td class="op">Datum:</td>';
+              html_history += '<td class="op" lang="de" data-lang-token="date">Datum:</td>';
               html_history += '<td class="opval">' + moment_date.format('l') + '</td>';
               html_history += '</tr>';
               html_history += '<tr>';
-              html_history += '<td class="op">Uhr:</td>';
+              html_history += '<td class="op" lang="de" data-lang-token="time">Uhr:</td>';
               html_history += '<td class="opval">' + moment_date.format('hh:mm') + '</td>';
               html_history += '</tr>';
               html_history += '<tr>';
-              html_history += '<td class="op">Hausarzt:</td>';
+              html_history += '<td class="op" lang="de" data-lang-token="famDoctor">Hausarzt:</td>';
               html_history += '<td class="opval">' + elem.ServiceName + '</td>';
               html_history += '</tr>';
               html_history += '</table>';
@@ -714,7 +714,7 @@ var service = {
           });
 
           $('.categories_container').append(html);
-          $('.for_artze_categ').text(' for ' + current_category.DefaultName);
+          $('.for_artze_categ').text(' - ' + current_category.DefaultName);
         }
 
       },
@@ -760,7 +760,7 @@ var service = {
             html += '</tr>';
           });
           if( data.ProviderList.length == 0 ){
-            html = '<tr><td><h2 class="text-center">No providers for this category.</h2></td></tr>'
+            html = '<tr><td><h2 class="text-center" lang="de" data-lang-token="noProviderForCateg">Keine Anbieter zu dieser Kategorie</h2></td></tr>'
           }
           $('.providers_container').append(html);
         }
@@ -810,7 +810,7 @@ var service = {
             });
             $('.btn-list.service_categories').append(html);
           }else{
-            $('.btn-list.service_categories').append('<h3>There are no services for this provider.</h3>');
+            $('.btn-list.service_categories').append('<h3 lang="de" data-lang-token="noServiceForProvider">Es gibt keine Dienstleistungen für diesen Anbieter.</h3>');
             $('.go_to_artze').removeClass('hidden');
           }
         }
@@ -848,7 +848,7 @@ var service = {
             helper.service_select(data.ServiceList[0].Id,data.ServiceList[0].Name);
             html = '';
             html += '<h3 class="text-center">'+data.ServiceList[0].Name+'</h3>';
-            html += '<textarea rows="6" id="other_service_id" placeholder="Add service description"></textarea>';
+            html += '<textarea rows="6" id="other_service_id" placeholder="In Service-Beschreibung" lang="de"></textarea>';
             $('.service_categories').html(html);
           }
         }
