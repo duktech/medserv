@@ -51,6 +51,8 @@
 		"success": "ÉXITO",
 		"summary": "Sumario",
 		"successTitle": "Felicitaciones",
-		"appSubmitted": "Su designación ha sido enviado correctamente"
+		"appSubmitted": "Su designación ha sido enviado correctamente",
+		"newTermin1": "newTermin1",
+		"newTermin2": "newTermin2"
 	}
 }

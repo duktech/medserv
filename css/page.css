@@ -1007,3 +1007,14 @@ td.nameContainer{
 	font-weight: bold;
 	font-size: 20px;
 }
+.newTerminBtn{
+	width: 100px;
+	height: 100px;
+	background: red;
+	color: #fff;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 50%;
+	padding-top: 20px;
+	margin-top: 80px;
+}

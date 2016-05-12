@@ -51,6 +51,9 @@
 		"success": "SUCCES",
 		"summary": "Sumar",
 		"successTitle": "Felicitări",
-		"appSubmitted": "Programarea dvs. a fost efectuată cu succes"
+		"appSubmitted": "Programarea dvs. a fost efectuată cu succes",
+		"newTermin1": "newTermin1",
+		"newTermin2": "newTermin2"
+		
 	}
 }
